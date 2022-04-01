@@ -1,0 +1,19 @@
+
+- user must be able to make a account
+- user must be able to login to their accout
+- user must be able to logout of the account
+
+- user must be able to make connection with other user
+- user must be able to block other user
+
+- user must be able to share post(photos initially)
+- user must be able to see his/her time line
+- user must be able to like the post
+- user must be able to see the post statics
+- user must be able to comment on post
+- user must be able to see all his/her upload history
+
+- user must be able to et his/his or her profile
+- user must be able to upload the stories
+- user must be able to get notification of the activity going on like(likes and comment on the post)
+  
