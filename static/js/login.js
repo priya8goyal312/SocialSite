@@ -15,6 +15,12 @@ loginButton.addEventListener("click", login);
 
 // login
 function login(){
+    let emailInpValue = emailInp.value;
+    let passwordInpValue = passwordInp.value;
+
+    let isEmailValid = false;
+    let ispasswordValid = false;
+
 
     // email field validation
     let emailWarningTextId = emailInp.dataset.warningTextId;
@@ -24,20 +30,34 @@ function login(){
     let passwordWarningText = document.getElementById(passwordWarningTextId);
     
     // email validation 
-    if( emailInp.value === ""){
+    if( emailInpValue === ""){
         emailWarningText.innerText = "Oops! looks like email is empty";
         emailWarningText.style.display = "block";
     }
-    else if( !emailInp.value.includes(".com") ){
+    else if( !emailInpValue.includes(".com") ){
         emailWarningText.innerText = "invalid email";
         emailWarningText.style.display = "block";
     }
+    else{
+        isEmailValid = true;
+    }
     
     //password validation 
-    if( passwordInp.value === "" ){
+    if( passwordInpValue === "" ){
         passwordWarningText.innerText = "Oops! looks like password is empty";
         passwordWarningText.style.display = "block";
     }
+    else{
+        ispasswordValid = true;
+    }
+
+
+    // main login 
+    if( isEmailValid && ispasswordValid ){
+        alert("valide entries");
+    }
+
+
 }
 // end
 
