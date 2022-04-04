@@ -1,0 +1,55 @@
+$primary-dark: #2F2E41;
+$primary-gray: #C3C3C3;
+$primary-pink: #FF6B95;
+$primary-white: #FFFFFF;
+$primary-yellow: #FFC796;
+
+body{
+    background-color: white;
+    background-image: url(../images/backgrounds/landingpageBG1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+}
+
+#base{
+    background-color: transparent;
+    background-image: url(../images/backgrounds/landingpageBG2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: top;
+    height: 100vh;
+    width: 100vw;
+}
+
+#parentBox{
+
+    h1{
+        color: rgba($primary-dark,1.0);
+        font-size: 5rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h5{
+        color: rgba($primary-dark,1.0);
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .button{
+        width: 120px;
+        height: 40px;
+        background-color: $primary-yellow;
+        border: none;
+        border-radius: 10px;
+        color: rgba($primary-dark,1.0);
+        font-weight: 600;
+        transition: 0.2s;
+
+        &:hover{
+            color: rgba($primary-white,1.0);
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.4);
+        }
+    }
+}
