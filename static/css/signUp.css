@@ -17,37 +17,37 @@ body {
   overflow-y: auto;
 }
 
-#loginBox {
+#signupBox {
   background-color: #FFFFFF;
   box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
   border: none;
   border-radius: 10px;
   min-height: 400px;
 }
-#loginBox h1 {
+#signupBox h1 {
   color: #2F2E41;
   font-weight: 600;
   font-size: 2rem;
   text-align: center;
 }
-#loginBox label {
+#signupBox label {
   color: #2F2E41;
   font-size: 1rem;
 }
-#loginBox input {
+#signupBox input {
   border: 2px solid #FFC796;
   border-radius: 10px;
   height: 40px;
 }
-#loginBox input:focus {
+#signupBox input:focus {
   border: 2px solid #FF6B95;
 }
-#loginBox .warningText {
+#signupBox .warningText {
   color: #ff4141;
   font-weight: 500;
   display: none;
 }
-#loginBox button {
+#signupBox button {
   width: 120px;
   height: 40px;
   background-color: #FFC796;
@@ -57,24 +57,24 @@ body {
   font-weight: 600;
   transition: 0.2s;
 }
-#loginBox button:hover {
+#signupBox button:hover {
   color: white;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
 }
-#loginBox a {
+#signupBox a {
   text-align: center;
   text-decoration: none;
 }
-#loginBox a:link {
+#signupBox a:link {
   color: #2F2E41;
 }
-#loginBox a:visited {
+#signupBox a:visited {
   color: #2F2E41;
 }
-#loginBox a:active {
+#signupBox a:active {
   color: #2F2E41;
 }
-#loginBox a .highlight {
+#signupBox a .highlight {
   color: #FF6B95;
   font-weight: 600;
-}/*# sourceMappingURL=login.css.map */
+}/*# sourceMappingURL=signUp.css.map */
