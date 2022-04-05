@@ -11,15 +11,17 @@
     <!-- custome CSS -->
     <link rel="stylesheet" href="../static/css/upload.css">
 
-    <title>Openion</title>
+    <title>Opinion</title>
   </head>
   <body>
     <section class="d-flex p-0 p-md-2 p-lg-4 d-flex justify-content-center" id="base">
         <div class="col-12 col-md-10 p-2" id="uploadBox">
           <div class="d-flex flex-column flex-md-row col-12">
-            <div class="position-relative col-12 col-md-6" id="imageBox">
-              <input type="file" id="actualImageInput" multiple>
-              <img src="" alt="" class="position-absolute img-fluid" id="imageToUpload">
+            <div class="position-relative col-12 col-md-6 d-flex justify-content-center align-self-center" id="imageBox">
+              <input type="file" id="actualImageInput">
+              <div class="position-absolute col-12 col-md-6 mx-auto" id="imageToUploadPreviewBox">
+                <img src="" alt="" class="img-fluid my-auto mx-auto" id="imageToUploadPreview">
+              </div>
               <div class="position-absolute col-12 d-flex justify-content-center" id="overlayBox">
                 <span class="align-self-center"> + </span>
               </div>
@@ -32,7 +34,10 @@
             </div>
           </div>
           <div class="my-4 d-flex flex-column">
-            <button class="button align-self-center">post</button>
+            <div class="align-self-center d-flex">
+              <button class="button mx-2" id="reselectButton">Reselect</button>
+              <button class="button mx-2">Post</button>
+            </div>
             <div class="position-relative col-8 align-self-center my-4">
               <div class="progressBar position-absolute"> </div>
               <div class="progressBar position-absolute" id="progressBarActualProgress"> </div>

@@ -25,6 +25,14 @@
   display: none;
 }
 
+#imageToUploadPreview {
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 300;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
 #overlayBox {
   background-color: rgba(0, 0, 0, 0.6);
   min-width: 200px;
@@ -68,6 +76,10 @@
 .button:hover {
   color: white;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+#reselectButton {
+  display: none;
 }
 
 .progressBar {

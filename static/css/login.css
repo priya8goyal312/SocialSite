@@ -43,7 +43,7 @@ body {
   border: 2px solid #FF6B95;
 }
 #loginBox .warningText {
-  color: rgb(255, 65, 65);
+  color: #ff4141;
   font-weight: 500;
   display: none;
 }

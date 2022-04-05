@@ -46,6 +46,13 @@ body{
         display: none;
     }
 }
+#imageToUploadPreview{
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 300;
+    max-height: 300px;
+    border-radius: $primary-border-radius;
+}
 
 #overlayBox{
     background-color: rgba(0, 0, 0, 0.6);
@@ -97,6 +104,10 @@ body{
         color: rgba($primary-white,1.0);
         box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.4);
     }
+}
+
+#reselectButton{
+    display: none;
 }
 
 .progressBar{
