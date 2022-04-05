@@ -43,7 +43,7 @@ body {
   border: 2px solid #FF6B95;
 }
 #signupBox .warningText {
-  color: #ff4141;
+  color: rgb(255, 65, 65);
   font-weight: 500;
   display: none;
 }
