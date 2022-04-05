@@ -1,0 +1,112 @@
+$primary-dark: #2F2E41;
+$primary-gray: #C3C3C3;
+$primary-pink: #FF6B95;
+$primary-white: #FFFFFF;
+$primary-yellow: #FFC796;
+$light-gray: #F2F2F2;
+
+$primary-border-radius: 10px;
+
+body{
+    // background-color: white;
+    // background-image: url(../images/backgrounds/landingpageBG3.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: bottom;
+}
+
+#base{
+    background-color: $light-gray;
+    // background-image: url(../images/backgrounds/landingpageBG2.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: top;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+}
+
+#uploadBox{
+    background-color: $primary-white;
+    min-height: 400px;
+    border-radius: $primary-border-radius;
+    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+#imageBox{
+    background-color: $primary-white;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 300;
+    max-height: 300px;
+    border-radius: $primary-border-radius;
+    aspect-ratio: 1 / 1;
+
+    #actualImageInput{
+        display: none;
+    }
+}
+
+#overlayBox{
+    background-color: rgba(0, 0, 0, 0.6);
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: $primary-border-radius;
+    aspect-ratio: 1 / 1;
+    
+    span{
+        color: $primary-white;
+        font-size: 5rem;
+        font-weight: 200;
+    }
+
+}
+#descriptionBox{
+
+    #todaysDate{
+        color: $primary-dark;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    label{
+        color: $primary-dark;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    #captionInp{
+        border-radius: $primary-border-radius;
+        border: 2px solid $primary-yellow;
+    }
+}
+
+.button{
+    width: 120px;
+    height: 40px;
+    background-color: $primary-yellow;
+    border: none;
+    border-radius: 10px;
+    color: rgba($primary-dark,1.0);
+    font-weight: 600;
+    transition: 0.2s;
+
+    &:hover{
+        color: rgba($primary-white,1.0);
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.4);
+    }
+}
+
+.progressBar{
+    height: 5px;
+    width: 100%;
+    background-color: $primary-gray;
+    border-radius: $primary-border-radius;
+}
+
+#progressBarActualProgress{
+    width: 40%;
+    background-color: $primary-pink;
+}
