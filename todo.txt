@@ -1,2 +1,2 @@
-- file extension check on image upload file
-- show validation warning on image upload page 
+(done) - file extension check on image upload file
+(done) - show validation warning on image upload page 

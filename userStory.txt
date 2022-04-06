@@ -13,7 +13,7 @@
 - user must be able to comment on post
 - user must be able to see all his/her upload history
 
-- user must be able to et his/his or her profile
-- user must be able to upload the stories
+- user must be able to get his/his or her profile
+- user must be able to upload the stories (postpone)
 - user must be able to get notification of the activity going on like(likes and comment on the post)
   

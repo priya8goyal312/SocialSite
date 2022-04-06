@@ -21,6 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
+const storage = getStorage();
 const databaseRef = ref(db);
 
-export{ app, db, databaseRef };
+export{ app, db, storage ,databaseRef, ref, sRef, uploadBytesResumable, getDownloadURL };

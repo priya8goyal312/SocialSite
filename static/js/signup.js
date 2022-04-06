@@ -19,7 +19,7 @@ function signup(){
 
     let isEmailValid = false;
 
-
+    
     // email field validation
     let emailWarningTextId = emailInp.dataset.warningTextId;
     let emailWarningText = document.getElementById(emailWarningTextId);
