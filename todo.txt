@@ -1,0 +1,2 @@
+- file extension check on image upload file
+- show validation warning on image upload page 

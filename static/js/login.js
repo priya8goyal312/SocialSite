@@ -1,3 +1,8 @@
+import { db } from "./firebaseConfig.js"
+
+console.log(db);
+
+
 let emailInp = document.getElementById("emailInp");
 let passwordInp = document.getElementById("passwordInp");
 let loginButton = document.getElementById("loginButton");
