@@ -1,0 +1,65 @@
+body {
+  background-color: white;
+}
+
+#base {
+  background-color: transparent;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+}
+@media screen and (max-width: 576px) {
+  #base #leftBox {
+    height: 90vh;
+  }
+  #base #rightBox {
+    height: 10vh;
+  }
+}
+
+#topBar {
+  height: 3rem;
+  background-color: #F2F2F2;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  background-color: #FF6B95;
+}
+.avatar .avatarImage {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.4);
+}
+
+#chatShowArea {
+  height: calc(100% - 6rem);
+  background-color: rosybrown;
+}
+
+.message {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  width: 50%;
+}
+@media screen and (max-width: 576px) {
+  .message {
+    width: 100%;
+  }
+}
+
+.leftMessage {
+  border-bottom-left-radius: 0px;
+}
+
+.rightMessage {
+  border-bottom-right-radius: 0px;
+}
+
+#bottomBar {
+  height: 3rem;
+  background-color: #F2F2F2;
+}/*# sourceMappingURL=chat.css.map */
