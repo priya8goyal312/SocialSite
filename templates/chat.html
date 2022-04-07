@@ -38,18 +38,33 @@
           </div>
           <!-- chat show area end -->
           <!-- bottom bar -->
-          <div class="" id="bottomBar" style="background-color: cadetblue;">
-          
+          <div class="col-12 d-flex align-items-center px-2" id="bottomBar">
+            <input type="text" class="col-10 col-sm-11" id="messageInputBox" placeholder="type here ...">
+            <img src="../static/images/icons/send1.png" alt="" class="mx-auto" id="sendButton">
           </div>
           <!-- bottom bar -->
         </div>
-        <div class="col-12 col-sm-3" id="rightBox" style="background-color:blueviolet;">
-          right
+        <div class="col-12 col-sm-3 flex-column" id="rightBox">
+          <div class="d-none d-sm-block my-0" id="emojiHeading">
+            <p>Emoji</p>
+          </div>
+          <div class="col-12 d-flex flex-sm-wrap" id="emojiBox" >
+            <div class="p-2" onclick="appendEmoji('&#128517')">&#128517</div>
+            <div class="p-2" onclick="appendEmoji('&#128518')">&#128518</div>
+            <div class="p-2" onclick="appendEmoji('&#128519')">&#128519</div>
+            <div class="p-2" onclick="appendEmoji('&#128520')">&#128520</div>
+            <div class="p-2" onclick="appendEmoji('&#128521')">&#128521</div>
+            <div class="p-2" onclick="appendEmoji('&#128522')">&#128522</div>
+            <div class="p-2" onclick="appendEmoji('&#128523')">&#128523</div>
+            <div class="p-2" onclick="appendEmoji('&#128524')">&#128524</div>
+            
+          </div>
+          <div></div>
         </div>
     </section>
 
     <!-- custome js -->
-    <script type="module" src=""></script>
+    <script type="module" src="../static/js/chat.js"></script>
     <!-- custome js end -->
 
     <!-- BootStrap Js -->

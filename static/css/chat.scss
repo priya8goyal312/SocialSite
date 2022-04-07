@@ -85,5 +85,34 @@ body{
 #bottomBar{
     height: 3rem;
     background-color: $secondary-gray;
+
+    #messageInputBox{
+        border: 2px solid $primary-yellow;
+        border-radius: $primary-border-radius;
+        height: 40px;
+
+        &:focus{
+            border: 2px solid $primary-pink;
+        }
+    }
+    
+    #sendButton{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 }
 
+#rightBox{
+    #emojiHeading{
+        
+        color: $primary-gray;
+        background-color: $primary-white;
+        text-align: center;
+        // border-bottom: 1px solid $secondary-gray;
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
+    }
+    #emojiBox{
+        overflow-x: auto ;
+        max-height: calc((100%) - 3rem);;
+    }
+}

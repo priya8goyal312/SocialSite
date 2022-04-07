@@ -62,4 +62,27 @@ body {
 #bottomBar {
   height: 3rem;
   background-color: #F2F2F2;
+}
+#bottomBar #messageInputBox {
+  border: 2px solid #FFC796;
+  border-radius: 10px;
+  height: 40px;
+}
+#bottomBar #messageInputBox:focus {
+  border: 2px solid #FF6B95;
+}
+#bottomBar #sendButton {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#rightBox #emojiHeading {
+  color: #C3C3C3;
+  background-color: #FFFFFF;
+  text-align: center;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+#rightBox #emojiBox {
+  overflow-x: auto;
+  max-height: calc(100% - 3rem);
 }/*# sourceMappingURL=chat.css.map */
