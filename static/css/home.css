@@ -1,0 +1,94 @@
+body {
+  background-color: white;
+}
+
+#base {
+  background-color: transparent;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+}
+
+#homeParent {
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+#homeParent::-webkit-scrollbar {
+  display: none;
+}
+
+#homeTopBar {
+  height: 3rem;
+  background-color: #F2F2F2;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+}
+.avatar .avatarImage {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+#menuButton {
+  background-color: #F2F2F2;
+}
+#menuButton .avatarImage {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+#addPostButton {
+  background-color: #FF6B95;
+}
+
+#openchatsButton {
+  background-color: #FFC796;
+}
+
+#profileCard {
+  background-color: #FFFFFF;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#profileImageBox {
+  min-height: 200px;
+  max-height: 300px;
+}
+#profileImageBox #profileImage {
+  min-height: 200px;
+  max-height: 300px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#name {
+  color: #3F3D56;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#description {
+  color: #3F3D56;
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#divider {
+  border-color: #F2F2F2;
+}
+
+.postPreviewBox {
+  height: 200px;
+  border-radius: 10px;
+}/*# sourceMappingURL=home.css.map */
