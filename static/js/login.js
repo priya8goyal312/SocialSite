@@ -1,6 +1,4 @@
-import { db } from "./firebaseConfig.js"
-
-console.log(db);
+import { db, databaseRef, get, child} from "./firebaseConfig.js";
 
 
 let emailInp = document.getElementById("emailInp");
@@ -60,8 +58,16 @@ function login(){
     // main login 
     if( isEmailValid && ispasswordValid ){
         alert("valide entries");
+        get(child(databaseRef, "SerialCount/userSerialCount"))
+        .then((snapshot) => {
+            currentSerialCount = snapshot.val();
+            console.log(snapshot.val());
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("error aa gai h userSerialCount fetch krne m");
+        });
     }
-
 
 }
 // end

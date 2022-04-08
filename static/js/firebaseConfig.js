@@ -24,4 +24,4 @@ const db = getDatabase();
 const storage = getStorage();
 const databaseRef = ref(db);
 
-export{ app, db, storage ,databaseRef, ref, sRef, uploadBytesResumable, getDownloadURL };
+export{ app, db, storage ,databaseRef, ref, get, set, child, update, sRef, uploadBytesResumable, getDownloadURL };
