@@ -1,0 +1,118 @@
+$primary-dark: #2F2E41;
+$primary-gray: #C3C3C3;
+$primary-pink: #FF6B95;
+$primary-white: #FFFFFF;
+$primary-yellow: #FFC796;
+
+$secondary-gray: #F2F2F2;
+$secondary-dark: #3F3D56;
+
+$primary-border-radius: 10px;
+
+$sm: 576px;
+
+body{
+    background-color: white;
+    // background-image: url(../images/backgrounds/landingpageBG3.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: bottom;
+}
+
+#base{
+    background-color: transparent;
+    // background-image: url(../images/backgrounds/landingpageBG2.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: top;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+}
+
+#homeParent{
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+#homeTopBar{
+    height: 3rem;
+    background-color: $secondary-gray;
+}
+
+.avatar{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.5rem;
+
+    .avatarImage{
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}
+#menuButton{
+    background-color: $secondary-gray;
+
+    .avatarImage{
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+}
+#addPostButton{
+    background-color: $primary-pink;
+}
+
+#openchatsButton{
+    background-color: $primary-yellow;
+}
+
+#profileCard{
+    // height: 500px;
+    background-color: $primary-white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#profileImageBox{
+    min-height: 200px;
+    max-height: 300px;
+
+    #profileImage{
+        min-height: 200px;
+        max-height: 300px;
+
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+#name{
+    color: $secondary-dark;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#description{
+    color: $secondary-dark;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#divider{
+    border-color: $secondary-gray;
+}
+
+.postPreviewBox{
+    height: 200px;
+    border-radius: 10px;
+}
