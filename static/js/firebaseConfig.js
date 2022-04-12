@@ -1,7 +1,7 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-import { getDatabase, ref, get, set, child, update, remove }
+import { getDatabase, ref, get, set, child, update, remove, query, equalTo, orderByChild }
     from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL }
     from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
@@ -24,4 +24,4 @@ const db = getDatabase();
 const storage = getStorage();
 const databaseRef = ref(db);
 
-export{ app, db, storage ,databaseRef, ref, get, set, child, update, sRef, uploadBytesResumable, getDownloadURL };
+export{ app, db, storage ,databaseRef, ref, get, set, child, update, sRef, uploadBytesResumable, getDownloadURL, query, equalTo, orderByChild };

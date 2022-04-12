@@ -1,3 +1,6 @@
+import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByChild} from "./firebaseConfig.js";
+
+
 let emailInp = document.getElementById("emailInp");
 let passwordInp = document.getElementById("passwordInp");
 let confirmPasswordInp = document.getElementById("confirmPasswordInp");
@@ -75,23 +78,85 @@ function signup(){
     
 
     // main login 
-    if( isEmailValid && isPasswordValid && isConfirmPasswordValid ){
+    if( isEmailValid && isPasswordValid && isConfirmPasswordValid ){  
+        // gettting the current serial count
         get(child(databaseRef, "SerialCount/userSerialCount"))
         .then((snapshot) => {
-            currentSerialCount = snapshot.val();
-            console.log(snapshot.val());
+            let currentSerialCount = snapshot.val();
+            let newUserIdId = currentSerialCount+1;
+
+            //if( newUserIdId < 10){
+            if( newUserIdId === 1){
+                let userData = {
+                    userId: newUserIdId,
+                    userName: "N/A",
+                    userEmail: emailInpValue.trim(),
+                    userPassword: passwordInpValue
+                };
+
+                createUser(newUserIdId, userData);
+            }else{
+                // checking if the email is already taken or not
+                const userQuery = query(ref(db,"Users"),orderByChild("userEmail"),equalTo(emailInpValue.trim()));
+                get(userQuery)
+                .then((snapshot) => { 
+                    console.table(snapshot.val());
+                    
+                    if( snapshot.val() === null ){
+                        let userData = {
+                            userId: newUserIdId,
+                            userName: "N/A",
+                            userEmail: emailInpValue.trim(),
+                            userPassword: passwordInpValue
+                        };
+
+                        createUser(newUserIdId, userData);
+                    }
+                    else{
+                        alert("This email already registered");
+                    }
+                })
+                .catch((error) => { 
+                    console.log(error);
+                    console.log("error aa gai h user fetch krne m");
+                });
+            }
+            
+            
         })
         .catch((error) => {
             console.log(error);
             console.log("error aa gai h userSerialCount fetch krne m");
         });
     }
-
-
 }
 // end
 
+// function to create user
+function createUser( newUserIdId, userData ){
+    set(ref(db, "Users/" + newUserIdId), userData)
+    .then(() => {
+        console.log("profile create ho gai h");
 
+        update(ref(db,"SerialCount"), {
+            userSerialCount: newUserIdId,
+        })
+        .then(() => {
+            console.log("userSerialCount updated successfully");
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("error aa gai h userSerialCount update m");
+        }); 
+
+        window.location.href = "login.html"; 
+    })
+    .catch((error) => {
+        console.log(error);
+        console.log("error aa gai h profile create krne m");
+    });
+}
+// end
 
 
 // function to make warning message display none
