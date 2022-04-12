@@ -90,5 +90,7 @@ body {
 
 .postPreviewBox {
   height: 200px;
+}
+.postPreviewBox .postPreviewInnerBox {
   border-radius: 10px;
 }/*# sourceMappingURL=home.css.map */

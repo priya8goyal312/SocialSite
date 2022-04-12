@@ -114,5 +114,8 @@ body{
 
 .postPreviewBox{
     height: 200px;
-    border-radius: 10px;
+
+    .postPreviewInnerBox{
+        border-radius: 10px;
+    }
 }
