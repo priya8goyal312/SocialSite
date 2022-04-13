@@ -1,4 +1,5 @@
-import { db, databaseRef, get, child} from "./firebaseConfig.js";
+import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByChild} from "./firebaseConfig.js";
+
 
 
 let emailInp = document.getElementById("emailInp");
@@ -57,15 +58,36 @@ function login(){
 
     // main login 
     if( isEmailValid && ispasswordValid ){
-        alert("valide entries");
-        get(child(databaseRef, "SerialCount/userSerialCount"))
-        .then((snapshot) => {
-            currentSerialCount = snapshot.val();
-            console.log(snapshot.val());
+        // alert("valide entries"); //REMOVE IT
+        const userQuery = query(ref(db,"Users"),orderByChild("userEmail"),equalTo(emailInpValue.trim()));
+
+        get(userQuery)
+        .then((snapshot) => { 
+            console.table(snapshot.val());
+            
+            if( snapshot.val() === null ){
+                alert("invalid email");
+            }
+            else{
+                let isCredentialCorrect = false;
+                snapshot.forEach(child => {
+                    // console.log(child.val()); //REMOVE IT
+                    if(child.val().userPassword === passwordInpValue){
+                        isCredentialCorrect = true;
+                    }
+                });
+
+                if( isCredentialCorrect === true ){
+                    alert("woho correct credential");
+                }
+                else{
+                    alert("Ooops wrong password");
+                }
+            }
         })
-        .catch((error) => {
+        .catch((error) => { 
             console.log(error);
-            console.log("error aa gai h userSerialCount fetch krne m");
+            console.log("error aa gai h user fetch krne m");
         });
     }
 
