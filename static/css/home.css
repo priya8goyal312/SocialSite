@@ -2,11 +2,96 @@ body {
   background-color: white;
 }
 
-#base {
+#sideNavBar {
+  background-color: #FFFFFF;
+  height: 100vh;
+  width: 200px;
+  position: absolute;
+  z-index: 1010;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
+  border-top-right-radius: 10px;
+  transition: left 0.5s ease-in-out;
+}
+#sideNavBar .navBarButtonImages {
+  width: 25px;
+  height: 25px;
+}
+#sideNavBar #menuHeader {
+  height: 120px;
+  width: 200px;
+}
+
+.navBarClose {
+  left: -200px;
+}
+
+.navBarOpen {
+  left: 0px;
+}
+
+.menuHeaderBackgroundDayMode {
+  height: 120px;
+  width: 200px;
+  background-image: url("../images/backgrounds/navBarTopBarBG1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-top-right-radius: 10px;
+}
+
+.menuHeaderBackgroundNightMode {
+  height: 120px;
+  width: 200px;
+  background-image: url("../images/backgrounds/navBarTopBarBG2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-top-right-radius: 10px;
+}
+
+.dayThemeButton {
+  background: url("../images/icons/dayModeButton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0px solid transparent;
+  height: 30px;
+  width: 30px;
+  padding: 10px;
+  margin-top: 0px;
+}
+
+.nightThemeButton {
+  background: url("../images/icons/nightModeButton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 30px;
+  width: 30px;
+  padding: 10px;
+  margin-top: 0px;
+  border: 0px solid transparent;
+}
+
+#menuCloseButton {
+  background: url("../images/icons/cancle1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0px solid transparent;
+  height: 30px;
+  width: 30px;
+  padding: 10px;
+  margin-top: 0px;
+}
+
+#dateDisplay {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#ProfileSection {
   background-color: transparent;
   height: 100vh;
   width: 100vw;
   overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
 }
 
 #homeParent {

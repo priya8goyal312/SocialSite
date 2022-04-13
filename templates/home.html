@@ -14,10 +14,46 @@
     <title>Opinion</title>
   </head>
   <body>
-    <section class="d-flex justify-content-center" id="base">
-       
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6" id="homeParent" style="background-color: #F2F2F2;">
+    <nav class="navBarClose" id="sideNavBar">
+      <!-- <div class="btn ">
+        <span class="fas fa-bars"></span>
+      </div> -->
+     
+      <header id="menuHeader" class="menuHeaderBackgroundDayMode d-flex justify-content-between p-2 mb-4">
+          <p id="dateDisplay" class="my-2">
+              <!-- DYNAMIC CONTENT HERE -->
+          </p>
+          <div class="d-flex flex-column">
+            <div id="themeSwitch" class="dayThemeButton my-1"></div>
+            <div id="menuCloseButton" class="my-1"></div>
+          </div>
+      </header>
+      <div class="d-flex flex-column px-2">
+          <div class="col-12 menubutton my-2">
+              <img class="navBarButtonImages" id="Home" src="../static/images/icons/home1.png">
+              Home
+          </div>
+          <div class="col-12 menubutton my-2">
+              <img class="navBarButtonImages" id="Profile" src="../static/images/icons/profile1.png">
+              Profile
+          </div>
+          <div class="col-12 menubutton my-2">
+              <img class="navBarButtonImages" id="Notification" src="../static/images/icons/notification1.png">
+              Notification
+          </div>
+          <div class="col-12 menubutton my-2">
+              <img class="navBarButtonImages" id="setting" src="../static/images/icons/setting1.png">
+              Setting
+          </div>
+      </div>
+      <footer class="menubutton Logout px-2">
+          <img class="navBarButtonImages" id="login" src="../static/images/icons/logout1.png">
+          Logout
+      </footer>
+    </nav>
 
+    <section class="d-flex justify-content-center" id="ProfileSection">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6" id="homeParent" style="background-color: #F2F2F2;">
           <!-- homeTopBar -->
           <div class="d-flex justify-content-between align-items-center px-2" id="homeTopBar">
             <div>
@@ -151,7 +187,7 @@ some line4
     </section>
 
     <!-- custome js -->
-    <script type="module" src=""></script>
+    <script type="module" src="../static/js/home.js"></script>
     <!-- custome js end -->
 
     <!-- BootStrap Js -->
