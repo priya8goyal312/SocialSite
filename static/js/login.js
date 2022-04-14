@@ -70,15 +70,20 @@ function login(){
             }
             else{
                 let isCredentialCorrect = false;
+                let fetchedUserId;
                 snapshot.forEach(child => {
                     // console.log(child.val()); //REMOVE IT
                     if(child.val().userPassword === passwordInpValue){
                         isCredentialCorrect = true;
+                        fetchedUserId = child.val().userId;
                     }
                 });
 
                 if( isCredentialCorrect === true ){
-                    alert("woho correct credential");
+                    localStorage.setItem("openionLoginStatus","loggedIn");
+                    localStorage.setItem("openionUserId",fetchedUserId);
+                    // alert("woho correct credential");
+                    window.location.href = "userNameSelection.html";
                 }
                 else{
                     alert("Ooops wrong password");
