@@ -91,19 +91,28 @@ function setUserName(){
             const userQuery = query(ref(db,"Users"),orderByChild("userName"),equalTo(userNameInpValue.trim()));
             get(userQuery)
             .then((snapshot) => {
-                userNameInpInvalidWarningText.innerText = "available";
-                userNameInpInvalidWarningText.style.display = "block";
+                // console.log(snapshot.val());
+                if( snapshot.val() === null ){
+                    userNameInpInvalidWarningText.innerText = "available";
+                    userNameInpInvalidWarningText.style.display = "block";
 
-                update(ref(db, "Users/"+userId), {
-                    userName: userNameInpValue,
-                })
-                .then(() => {
-                    console.log("user name set/updated successfully");
-                })
-                .catch((error) => {
-                    console.log(error);
-                    console.log("error aa gai h userName set/update krne m");
-                });
+                    update(ref(db, "Users/"+userId), {
+                        userName: userNameInpValue,
+                    })
+                    .then(() => {
+                        console.log("user name set/updated successfully");
+                        window.location.href="home.html";
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        console.log("error aa gai h userName set/update krne m");
+                    });
+                }
+                else{
+                    userNameInpInvalidWarningText.innerText = "not available";
+                    userNameInpInvalidWarningText.style.display = "block";
+                }
+                
 
             })
             .catch((error) => { 
