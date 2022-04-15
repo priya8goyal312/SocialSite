@@ -1,0 +1,102 @@
+
+$primary-dark: #2F2E41;
+$primary-gray: #C3C3C3;
+$primary-pink: #FF6B95;
+$primary-white: #FFFFFF;
+$primary-yellow: #FFC796;
+
+$secondary-gray: #F2F2F2;
+$secondary-dark: #3F3D56;
+
+$primary-border-radius: 10px;
+
+$sm: 576px;
+
+body{
+    background-color: $primary-white;
+    // background-image: url(../images/backgrounds/landingpageBG3.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: bottom;
+}
+
+#feedsSection{
+    background-color: transparent;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+   
+}
+
+#feedsParent{
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.postCard{
+   
+    // max-height: 280px;
+    // width: 400px;
+    background-color: $secondary-gray;
+    border-radius: $primary-border-radius;
+    // border: 10px;
+    border-color: #2F2E41;
+}
+
+.postCardTopBar{
+    
+    background-color:transparent;
+    height: 3rem;
+    border-radius: $primary-border-radius;
+
+    .postOwnerAvatar{
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 1.5rem;
+        margin-left: 2%;
+    }
+
+    #text{
+        font-size: 20px;
+        margin: -41px 50px;
+        padding: 10px 10px;
+    }
+    
+}
+
+
+
+.postCardContentBox{
+    height: 19rem;
+
+    .postCardContent{
+        width:100%;
+        height: 100%;
+        border-radius: $primary-border-radius;
+    }
+}
+
+
+.postCardBottomBar{
+    
+    background-color: transparent;
+    height: 3rem;
+    border-radius: $primary-border-radius;
+
+
+    img{
+        height: 30px;
+        margin-top: 9px;
+        margin-left: 2px;
+        padding: 1px 11px;
+    }
+
+}
+
+
+
