@@ -1,3 +1,4 @@
+// DOM elements 
 let sideNavBar = document.getElementById("sideNavBar");
 let menuButton = document.getElementById("menuButton");
 let menuCloseButton = document.getElementById("menuCloseButton");
@@ -11,8 +12,9 @@ let dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 
 
 // initial call
+checkIfLoggedIn();
 showDate();
-//end
+// end
 
 
 // Event Listener
@@ -24,15 +26,33 @@ themeSwitch.addEventListener("click",toggleTheme);
 
 // function
 
+// function to check if the user is logged in
+function checkIfLoggedIn(){
+    let loginStatus = localStorage.getItem('openionLoginStatus');
+    let userId = localStorage.getItem('openionUserId');
+
+    if( !(loginStatus && userId) ){
+        window.location.href = "login.html";
+    }
+
+}
+
+
+// function to toggle(open/close) menu
 function toggleMenu(){
     sideNavBar.classList.toggle("navBarOpen");
 }
 
+// function to toggle theme
 function toggleTheme(){
     themeSwitch.classList.toggle("nightThemeButton");
     menuHeader.classList.toggle("menuHeaderBackgroundNightMode");
+
+    // TOGGLE FUNCTIONALITY NOT COMPLETE
 }
 
+
+// function to show current date 
 function showDate(){
     let currentDate = "";
     let currentMonth = "";
