@@ -85,6 +85,7 @@ function signup(){
             let currentSerialCount = snapshot.val();
             let newUserIdId = currentSerialCount+1;
 
+            /*
             //if( newUserIdId < 10){
             if( newUserIdId === 1){
                 let userData = {
@@ -121,6 +122,20 @@ function signup(){
                     console.log("error aa gai h user fetch krne m");
                 });
             }
+            */
+
+            $.ajax({
+                method: "POST",
+                url: "/signup",
+                data: { 
+                    userName: "N/A",
+                    userEmail: emailInpValue.trim(),
+                    userPassword: passwordInpValue
+                }
+            })
+            .done(function( msg ) {
+                alert( "Data Saved: " + msg );
+            });
             
             
         })

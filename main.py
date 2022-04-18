@@ -12,11 +12,18 @@ import utility
 from utility.constants import *
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/socialsite'
 db = SQLAlchemy(app)
 
 
 api = Api(app)
+
+
+
+
+
+
 
 
 
@@ -29,9 +36,24 @@ class Dummytable(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     dummy_content = db.Column(db.String(150), unique=False, nullable=True)
 
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(100), unique=False, nullable=True)
+    user_email = db.Column(db.String(150), unique=False, nullable=True)
+    user_password = db.Column(db.String(150), unique=False, nullable=True)
+
 # end
 
 
+
+
+
+
+
+
+
+
+# api
 
 class TemplateForOtherClasses(Resource):
     def __init__(self):
@@ -46,10 +68,12 @@ class TemplateForOtherClasses(Resource):
     def delete(self):
         pass
 
+
 class LandingPage(Resource):
 
     def get(self):
         return render_template('index.html')
+
 
 class HelloWorld(Resource):
     def __init__(self):
@@ -63,7 +87,36 @@ class HelloWorld(Resource):
         return dummyDict
 
 
-# api.add_resource(HelloWorld,"/")
+class Signup(Resource):
+    def __init__(self):
+        pass
+
+    def post(self):
+        print("****************** in signup (post method)")
+        # print(request.form.get("userName"))
+        # print(request.form.get("userEmail"))
+        # print(request.form.get("userPassword"))
+
+        userNameInp = request.form.get("userName")
+        userEmailInp = request.form.get("userEmail")
+        userPasswordInp = request.form.get("userPassword")
+
+        print("--------before")
+        userEntry = User( user_name = userNameInp, user_email = userEmailInp ,user_password = userPasswordInp )
+        db.session.add(userEntry)
+        db.session.commit()
+        print("--------after")
+
+        return "hi form signup"
+        
+
+        
+# end
+
+
+
+
+
 
 
 
@@ -89,6 +142,11 @@ def userNameSelectionPage():
 
 # end
 
+
+
+
+
+api.add_resource(Signup,"/signup")
 
 
 if  __name__ == "__main__":
