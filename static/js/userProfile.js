@@ -9,6 +9,8 @@ import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByCh
 const loginStatus = localStorage.getItem('openionLoginStatus');
 const userId = localStorage.getItem('openionUserId');
 
+// variables
+let userNameSelected = false;
 
 // initial call
 
@@ -18,8 +20,14 @@ const userId = localStorage.getItem('openionUserId');
 
 
 // Event Listener
+console.log("before checkIfUserNameAssigned");
 checkIfUserNameAssigned();
+console.log("after checkIfUserNameAssigned");
+
+console.log("before check");
 check();
+console.log("after check");
+
 // end
 
 
@@ -28,11 +36,15 @@ check();
 
 // function to check if the user have a userName or not
 function checkIfUserNameAssigned(){
+    userNameSelected = false;
     get(child(databaseRef, "Users/"+userId+"/userName/"))
     .then((snapshot) => { 
         console.log(snapshot.val());
         if( snapshot.val() === "N/A" ){
             window.location.href = "userNameSelection.html";
+        }
+        else{
+            userNameSelected = true;
         }
     })
     .catch((error) => {
@@ -43,6 +55,6 @@ function checkIfUserNameAssigned(){
 
 
 function check(){
-
+    console.log(userNameSelected);
 }
 // end
