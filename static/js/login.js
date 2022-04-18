@@ -83,7 +83,7 @@ function login(){
                     localStorage.setItem("openionLoginStatus","loggedIn");
                     localStorage.setItem("openionUserId",fetchedUserId);
                     // alert("woho correct credential");
-                    window.location.href = "userNameSelection.html";
+                    window.location.href = "/userNameSelectionPage";
                 }
                 else{
                     alert("Ooops wrong password");

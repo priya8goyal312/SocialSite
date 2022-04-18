@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- custome CSS -->
-    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/index.css') }}">
 
     <title>Opinion</title>
   </head>
@@ -17,10 +17,10 @@
     <section class="d-flex flex-row justify-content-center" id="base">
         <div class="align-self-center" id="parentBox">
             <h1>Opinion</h1>
-            <h5>let’s connet our thoughts</h5>
+            <h5>let’s connect our thoughts</h5>
             <div class="align-self-center d-flex flex-column justify-content-center">
-                <a href="./templates/login.html" class="align-self-center my-2"><button class="button">LogIn</button></a>
-                <a href="#" class="align-self-center my-2"><button class="button">SignUp</button></a>
+                <a href="/loginPage" class="align-self-center my-2"><button class="button">LogIn</button></a>
+                <a href="/signupPage" class="align-self-center my-2"><button class="button">SignUp</button></a>
             </div>
         </div>
     </section>

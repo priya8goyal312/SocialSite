@@ -38,7 +38,7 @@ function checkLogin(){
         checkIfUserNameSet();
     }
     else{
-        window.location.href = "login.html";
+        window.location.href = "/loginPage";
     }
 }
 // end 
