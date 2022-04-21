@@ -1,7 +1,9 @@
 # from grpc import protos_and_services
 
+from email import message
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
+from grpc import Status
 from requests import delete
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import true
@@ -91,24 +93,97 @@ class Signup(Resource):
     def __init__(self):
         pass
 
+    """
+    this API will check if the given email already exist or not
+    and if it does not it will create the user and send back the response
+    accordingly but if user does exist it will not create a user and then
+    send a response accordingly 
+    """
     def post(self):
         print("****************** in signup (post method)")
-        # print(request.form.get("userName"))
-        # print(request.form.get("userEmail"))
-        # print(request.form.get("userPassword"))
 
         userNameInp = request.form.get("userName")
         userEmailInp = request.form.get("userEmail")
         userPasswordInp = request.form.get("userPassword")
 
-        print("--------before")
-        userEntry = User( user_name = userNameInp, user_email = userEmailInp ,user_password = userPasswordInp )
-        db.session.add(userEntry)
-        db.session.commit()
-        print("--------after")
+        # print(userNameInp)
+        # print(userEmailInp)
+        # print(userPasswordInp)
 
-        return "hi form signup"
+        apiResponse = {} # making a empty dict variable
+
+        existingUser = User.query.filter_by(user_email = userEmailInp).all()
+        # print(existingUser)
+
+        if(len(existingUser) == 0):
+            try:
+                userEntry = User( user_name = userNameInp, user_email = userEmailInp ,user_password = userPasswordInp )
+                db.session.add(userEntry)
+                db.session.commit()
+            except :
+                apiResponse = {
+                    "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                    "message": "Oops! seems like some error occurred server",
+                }
+            else: #else block of try, this will run when no error occurs and the user is created successfully
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_CREATED,
+                    "message": "user created",
+                }
         
+        else:
+            apiResponse = {
+                "api_status": SUCCESS_OK,
+                "status": EMAIL_EXIST,
+                "message": "this email already exist",
+            }
+        
+        return jsonify(apiResponse)
+        
+
+class Login(Resource):
+
+    def post(self):
+        print("********************************* in Login (post method)")
+
+        
+        userEmailInp = request.form.get("userEmail")
+        userPasswordInp = request.form.get("userPassword")
+
+        
+        # print(userEmailInp)
+        # print(userPasswordInp)
+
+        apiResponse = {} # making a empty dict variable
+
+        existingUser = User.query.filter_by( user_email = userEmailInp, user_password = userPasswordInp ).all()
+
+        if(len(existingUser) != 0):
+            try:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_EXIST,
+                    "message": "authentication successfull",
+                    "user_id": existingUser[0].user_id
+                }
+                
+            except :
+                apiResponse = {
+                    "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                    "message": "Oops! seems like some error occurred server",
+                }    
+        
+        else:
+            apiResponse = {
+                "api_status": SUCCESS_OK,
+                "status": USER_NOT_EXIST,
+                "message": "authentication failed",
+            }
+        
+        return jsonify(apiResponse)
+
+
 
         
 # end
@@ -147,6 +222,7 @@ def userNameSelectionPage():
 
 
 api.add_resource(Signup,"/signup")
+api.add_resource(Login,"/login")
 
 
 if  __name__ == "__main__":
