@@ -4,6 +4,7 @@ from email import message
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
 from grpc import Status
+from joblib import PrintTime
 from requests import delete
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import true
@@ -146,12 +147,10 @@ class Login(Resource):
 
     def post(self):
         print("********************************* in Login (post method)")
-
         
         userEmailInp = request.form.get("userEmail")
         userPasswordInp = request.form.get("userPassword")
-
-        
+   
         # print(userEmailInp)
         # print(userPasswordInp)
 
@@ -182,6 +181,61 @@ class Login(Resource):
             }
         
         return jsonify(apiResponse)
+
+
+
+class IsUserNameSelected(Resource):
+
+    def post(self):
+        print("********************************* in UserNameSelection (get method)")
+
+        userId = request.form.get("userId")
+
+        print(userId)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            existingUser = User.query.filter_by( user_id = userId ).all()
+
+            if (len(existingUser) != 0):
+                if(existingUser[0].user_id != "N/A"):
+                    apiResponse = {
+                        "api_status": SUCCESS_OK,
+                        "status": USER_NAME_SELECTED,
+                        "message": "user name already selected",
+                    }
+                else:
+                    apiResponse = {
+                        "api_status": SUCCESS_OK,
+                        "status": USER_NAME_NOT_SELECTED,
+                        "message": "user name not selected",
+                    }
+
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NOT_EXIST,
+                    "message": "user name can be selected",
+                }
+                
+                
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server",
+            }
+
+        
+            
+
+        
+        return jsonify(apiResponse)
+
+
+
 
 
 
@@ -223,6 +277,7 @@ def userNameSelectionPage():
 
 api.add_resource(Signup,"/signup")
 api.add_resource(Login,"/login")
+api.add_resource(IsUserNameSelected,"/isUserNameSelected")
 
 
 if  __name__ == "__main__":
