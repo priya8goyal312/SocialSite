@@ -58,6 +58,22 @@ function login(){
 
     // main login 
     if( isEmailValid && ispasswordValid ){
+
+        $.ajax({
+            method: "POST",
+            url: "/login",
+            data: { 
+                userEmail: emailInpValue.trim(),
+                userPassword: passwordInpValue
+            }
+        })
+        .done(function( response ) {
+            alert( "Data Saved: " + response.message );
+            console.log(response);
+        });
+
+
+        /*
         // alert("valide entries"); //REMOVE IT
         const userQuery = query(ref(db,"Users"),orderByChild("userEmail"),equalTo(emailInpValue.trim()));
 
@@ -94,6 +110,7 @@ function login(){
             console.log(error);
             console.log("error aa gai h user fetch krne m");
         });
+        */
     }
 
 }

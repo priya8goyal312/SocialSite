@@ -79,13 +79,29 @@ function signup(){
 
     // main login 
     if( isEmailValid && isPasswordValid && isConfirmPasswordValid ){  
+        
+        $.ajax({
+            method: "POST",
+            url: "/signup",
+            data: { 
+                userName: "N/A",
+                userEmail: emailInpValue.trim(),
+                userPassword: passwordInpValue
+            }
+        })
+        .done(function( response ) {
+            alert( "Data Saved: " + response );
+            console.log(response);
+        });
+        
+
+        /*
         // gettting the current serial count
         get(child(databaseRef, "SerialCount/userSerialCount"))
         .then((snapshot) => {
             let currentSerialCount = snapshot.val();
             let newUserIdId = currentSerialCount+1;
 
-            /*
             //if( newUserIdId < 10){
             if( newUserIdId === 1){
                 let userData = {
@@ -122,27 +138,13 @@ function signup(){
                     console.log("error aa gai h user fetch krne m");
                 });
             }
-            */
-
-            $.ajax({
-                method: "POST",
-                url: "/signup",
-                data: { 
-                    userName: "N/A",
-                    userEmail: emailInpValue.trim(),
-                    userPassword: passwordInpValue
-                }
-            })
-            .done(function( msg ) {
-                alert( "Data Saved: " + msg );
-            });
-            
             
         })
         .catch((error) => {
             console.log(error);
             console.log("error aa gai h userSerialCount fetch krne m");
         });
+        */
     }
 }
 // end
