@@ -1,5 +1,5 @@
 import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByChild} from "./firebaseConfig.js";
-
+import { SUCCESS_OK, USER_EXIST } from "./constants.js"
 
 
 let emailInp = document.getElementById("emailInp");
@@ -68,8 +68,16 @@ function login(){
             }
         })
         .done(function( response ) {
-            alert( "Data Saved: " + response.message );
             console.log(response);
+            if((response.api_status === SUCCESS_OK) && (response.status === USER_EXIST)){
+                localStorage.setItem("opinionLoginStatus","loggedIn");
+                localStorage.setItem("opinionUserId",response.user_id);
+
+                window.location.href = "/userNameSelectionPage";
+            }
+            else{
+                alert( "Notice: " + response.message );
+            }
         });
 
 
@@ -96,8 +104,8 @@ function login(){
                 });
 
                 if( isCredentialCorrect === true ){
-                    localStorage.setItem("openionLoginStatus","loggedIn");
-                    localStorage.setItem("openionUserId",fetchedUserId);
+                    localStorage.setItem("opinionLoginStatus","loggedIn");
+                    localStorage.setItem("opinionUserId",fetchedUserId);
                     // alert("woho correct credential");
                     window.location.href = "/userNameSelectionPage";
                 }

@@ -1,4 +1,5 @@
 import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByChild} from "./firebaseConfig.js";
+import { SUCCESS_OK, USER_CREATED } from "./constants.js"
 
 
 let emailInp = document.getElementById("emailInp");
@@ -90,8 +91,12 @@ function signup(){
             }
         })
         .done(function( response ) {
-            alert( "Data Saved: " + response );
-            console.log(response);
+            if((response.api_status === SUCCESS_OK) && (response.status === USER_CREATED)){
+                window.location.href = "/loginPage";
+            }
+            else{
+                alert( "Message: " + response.message );
+            }
         });
         
 
