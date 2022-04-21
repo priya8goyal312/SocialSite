@@ -1,4 +1,7 @@
 import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByChild} from "./firebaseConfig.js";
+// Remove firebase
+
+import { SUCCESS_OK } from "./constants.js"
 
 
 let userNameInp = document.getElementById("userNameInp");
@@ -7,7 +10,7 @@ let proceedButton = document.getElementById("proceedButton");
 let loginStatus;
 let userId;
 
-let eligiblilityStatus = false; 
+let eligibilityStatus = false; 
 
 
 
@@ -24,10 +27,10 @@ checkLogin()
 // functions
 
 
-// fucntion to check if the user is logged in
+// function to check if the user is logged in
 function checkLogin(){
-    loginStatus = localStorage.getItem('openionLoginStatus');
-    userId = localStorage.getItem('openionUserId');
+    loginStatus = localStorage.getItem('opinionLoginStatus');
+    userId = localStorage.getItem('opinionUserId');
 
     // var loginStatus = "dsfdhsflj";
     // var userId = "sdfd";
@@ -45,8 +48,9 @@ function checkLogin(){
 
 // fucntion to check if the user already have a userName
 function checkIfUserNameSet(){
-    eligiblilityStatus = false;
+    eligibilityStatus = false;
     
+    /* REMOVE
     get(child(databaseRef, "Users/"+userId))
     .then((snapshot) => {
         console.log(snapshot.val());
@@ -63,18 +67,39 @@ function checkIfUserNameSet(){
         console.log(error);
         console.log("error aa gai h user fetch krne m");
     });
+    */
+
+    $.ajax({
+        method: "POST",
+        url: "/isUserNameSelected",
+        data: { 
+            userId: localStorage.getItem('opinionUserId')
+        }
+    })
+    .done(function( response ) {
+        console.log(response)
+        alert( "Message: " + response.message );
+        /*
+        if((response.api_status === SUCCESS_OK) && (response.status === USER_CREATED)){
+            window.location.href = "/loginPage";
+        }
+        else{
+            alert( "Message: " + response.message );
+        }
+        */
+    });
 }
 // end
 
 // function to set the user name
 function setUserName(){
 
-    console.log("eligible for setting the userName =",eligiblilityStatus);
+    console.log("eligible for setting the userName =",eligibilityStatus);
 
     let userNameInpValue = userNameInp.value;
     let userNameInpInvalidWarningText = document.getElementById("userNameInpInvalidWarningText");
 
-    if( eligiblilityStatus && loginStatus  && userId ){
+    if( eligibilityStatus && loginStatus  && userId ){
         // alert(userNameInpValue);
 
         // varification of input field
@@ -88,6 +113,7 @@ function setUserName(){
             userNameInpInvalidWarningText.innerText = "checking availablity...";
             userNameInpInvalidWarningText.style.display = "block";
 
+            /* REMOVE
             const userQuery = query(ref(db,"Users"),orderByChild("userName"),equalTo(userNameInpValue.trim()));
             get(userQuery)
             .then((snapshot) => {
@@ -119,7 +145,7 @@ function setUserName(){
                 console.log(error);
                 console.log("error aa gai h user name check krne m");
             });
-            
+            */
         }
     }
     
