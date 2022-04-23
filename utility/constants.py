@@ -86,6 +86,7 @@ USER_NAME_EXIST = 12
 
 # Created status
 USER_CREATED = 20
+PROFILE_CREATED = 21
 
 # Update status
 USER_NAME_UPDATE = 30
@@ -94,11 +95,19 @@ USER_NAME_UPDATE = 30
 USER_NOT_EXIST = 40
 USER_NAME_DOES_NOT_EXIST = 41
 
-# Selected
+# Selected status
 USER_NAME_SELECTED = 50
 
-# Not-Selected
+# Not-Selected status
 USER_NAME_NOT_SELECTED = 60
+
+# change status
+USER_NAME_CHANGE_SUCCESS = 70
+USER_NAME_CHANGE_FAIL = 71
+
+# Not created status
+USER_NOT_CREATED = 80
+PROFILE_NOT_CREATED = 81
 
 
 

@@ -92,6 +92,13 @@ let USER_NAME_SELECTED = 50
 // not selected
 let USER_NAME_NOT_SELECTED = 60
 
+// change
+let USER_NAME_CHANGE_SUCCESS = 70
+let USER_NAME_CHANGE_FAIL = 71
+
+// Not created status
+let USER_NOT_CREATED = 80
+let PROFILE_NOT_CREATED = 81
 
 export{
 
@@ -186,6 +193,14 @@ export{
     USER_NAME_SELECTED,
 
     // not-selected
-    USER_NAME_NOT_SELECTED
+    USER_NAME_NOT_SELECTED,
+
+
+    USER_NAME_CHANGE_SUCCESS, 
+    USER_NAME_CHANGE_FAIL,
+
+    // Not created status
+    USER_NOT_CREATED,
+    PROFILE_NOT_CREATED 
 
 }
