@@ -1,6 +1,7 @@
 # from grpc import protos_and_services
 
 from email import message
+from enum import unique
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
 from grpc import Status
@@ -40,10 +41,26 @@ class Dummytable(db.Model):
     dummy_content = db.Column(db.String(150), unique=False, nullable=True)
 
 class User(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(100), unique=False, nullable=True)
-    user_email = db.Column(db.String(150), unique=False, nullable=True)
-    user_password = db.Column(db.String(150), unique=False, nullable=True)
+    user_id         = db.Column(db.Integer, primary_key=True)
+    user_name       = db.Column(db.String(100), unique=False, nullable=True)
+    user_email      = db.Column(db.String(150), unique=False, nullable=True)
+    user_password   = db.Column(db.String(150), unique=False, nullable=True)
+
+    profile = db.relationship("Profile", backref='user', lazy=True)
+
+class Profile(db.Model):
+
+    s_no                    = db.Column(db.Integer, primary_key=True)
+    user_id                 = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=True)
+    user_actual_name        = db.Column(db.String(100), unique=False, nullable=True)
+    user_profile_picture    = db.Column(db.Text, unique=False, nullable=True)	
+    user_bio                = db.Column(db.String(100), unique=False, nullable=True)
+    user_accout_view        = db.Column(db.String(15), unique=False, nullable=True)
+    user_total_post         = db.Column(db.Integer, unique=False, nullable=True)
+    user_total_follower     = db.Column(db.Integer, unique=False, nullable=True)
+    user_total_following    = db.Column(db.Integer, unique=False, nullable=True)
+
+
 
 # end
 
@@ -143,6 +160,7 @@ class Signup(Resource):
         return jsonify(apiResponse)
         
 
+
 class Login(Resource):
 
     def post(self):
@@ -187,7 +205,7 @@ class Login(Resource):
 class IsUserNameSelected(Resource):
 
     def post(self):
-        print("********************************* in UserNameSelection (get method)")
+        print("********************************* in UserNameSelection (post method)")
 
         userId = request.form.get("userId")
 
@@ -199,7 +217,8 @@ class IsUserNameSelected(Resource):
             existingUser = User.query.filter_by( user_id = userId ).all()
 
             if (len(existingUser) != 0):
-                if(existingUser[0].user_id != "N/A"):
+
+                if(existingUser[0].user_name != "N/A"):
                     apiResponse = {
                         "api_status": SUCCESS_OK,
                         "status": USER_NAME_SELECTED,
@@ -219,8 +238,6 @@ class IsUserNameSelected(Resource):
                     "message": "user name can be selected",
                 }
                 
-                
-
         except Exception as e:
             print(e)
             apiResponse = {
@@ -236,10 +253,120 @@ class IsUserNameSelected(Resource):
 
 
 
+class CheckUserNameAvailability(Resource):
+
+    def post(self):
+        print("********************************* in CheckUserNameAvailability (post method)")
+
+        userNameInp = request.form.get("userNameInp")
+
+        print(userNameInp)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            existingUser = User.query.filter_by( user_name = userNameInp ).all()
+
+            if (len(existingUser) != 0):
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NAME_EXIST,
+                    "message": "user name already selected",
+                }
+
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NAME_DOES_NOT_EXIST,
+                    "message": "user name already selected",
+                }
+                
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server",
+            }
+
+
+        return jsonify(apiResponse)
 
 
 
+class SetUserName(Resource):
+
+    def post(self):
+        print("********************************* in SetUserName (post method)")
+
+        userId = request.form.get("userId")
+        userNameInp = request.form.get("userNameInp")
+
+        print(userNameInp)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            userData = User.query.filter_by(user_id = userId).first()
+            userData.user_name = userNameInp
+            db.session.commit()
+
+            apiResponse = {
+                "api_status": SUCCESS_OK,
+                "status": USER_NAME_CHANGE_SUCCESS,
+                "message": "user name set successfully"
+            }
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "status": USER_NAME_CHANGE_FAIL,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+        return jsonify(apiResponse)
+
+
+class MakeProfile(Resource):
+
+    def post(self):
+        print("********************************* in Make Profile (post method)")
+
+        userId = request.form.get("UserId")
+
+        # print(userId)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            profileExist = Profile.query.filter_by( user_id = userId ).all()
+
+            if( len(profileExist) == 0 ):
+    
+                profileEntry = Profile( user_id = userId, user_actual_name = "N/A", user_profile_picture = "defaultAvatar", user_bio = "N/A", user_accout_view = "private", user_total_post = 0, user_total_follower = 0, user_total_following = 0  )
+                db.session.add(profileEntry)
+                db.session.commit()
+
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": PROFILE_CREATED,
+                    "message": "profile created"
+                }
+
+
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "status": PROFILE_NOT_CREATED,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+
+        return jsonify(apiResponse)
         
+
 # end
 
 
@@ -268,6 +395,10 @@ def signupPage():
 def userNameSelectionPage():
    return render_template('userNameSelection.html')
 
+@app.route('/homePage')
+def homePage():
+   return render_template('home.html')
+
 
 # end
 
@@ -278,6 +409,9 @@ def userNameSelectionPage():
 api.add_resource(Signup,"/signup")
 api.add_resource(Login,"/login")
 api.add_resource(IsUserNameSelected,"/isUserNameSelected")
+api.add_resource(CheckUserNameAvailability,"/checkUserNameAvailability")
+api.add_resource(SetUserName,"/setUserName")
+api.add_resource(MakeProfile,"/makeProfile")
 
 
 if  __name__ == "__main__":

@@ -1,7 +1,7 @@
 import { db, databaseRef, get, set, update,ref, child, query, equalTo, orderByChild} from "./firebaseConfig.js";
 // Remove firebase
 
-import { SUCCESS_OK } from "./constants.js"
+import { SUCCESS_OK, USER_NAME_NOT_SELECTED, USER_NAME_SELECTED, USER_NOT_EXIST, USER_NAME_EXIST, USER_NAME_DOES_NOT_EXIST, USER_NAME_CHANGE_SUCCESS} from "./constants.js"
 
 
 let userNameInp = document.getElementById("userNameInp");
@@ -78,22 +78,28 @@ function checkIfUserNameSet(){
     })
     .done(function( response ) {
         console.log(response)
-        alert( "Message: " + response.message );
-        /*
-        if((response.api_status === SUCCESS_OK) && (response.status === USER_CREATED)){
+        
+        if((response.api_status === SUCCESS_OK) && (response.status === USER_NAME_SELECTED)){
+            window.location.href = "/homePage";
+        }
+        else if((response.api_status === SUCCESS_OK) && (response.status === USER_NAME_NOT_SELECTED)){
+            eligibilityStatus = true;
+        }
+        else if((response.api_status === SUCCESS_OK) && (response.status === USER_NOT_EXIST)){
             window.location.href = "/loginPage";
         }
         else{
             alert( "Message: " + response.message );
+            window.location.href = "/loginPage";
         }
-        */
+        
     });
 }
 // end
 
 // function to set the user name
 function setUserName(){
-
+    
     console.log("eligible for setting the userName =",eligibilityStatus);
 
     let userNameInpValue = userNameInp.value;
@@ -112,6 +118,54 @@ function setUserName(){
         else{
             userNameInpInvalidWarningText.innerText = "checking availablity...";
             userNameInpInvalidWarningText.style.display = "block";
+
+            $.ajax({
+                method: "POST",
+                url: "/checkUserNameAvailability",
+                data: { 
+                    "userNameInp": userNameInpValue
+                }
+            })
+            .done(function( response ) {
+                console.log(response);
+
+                if((response.api_status === SUCCESS_OK) && (response.status === USER_NAME_EXIST)){
+                    userNameInpInvalidWarningText.innerText = "not available";
+                    userNameInpInvalidWarningText.style.display = "block";
+                }
+                if((response.api_status === SUCCESS_OK) && (response.status === USER_NAME_DOES_NOT_EXIST)){
+                    userNameInpInvalidWarningText.innerText = "available";
+                    userNameInpInvalidWarningText.style.display = "block";
+
+                    $.ajax({
+                        method: "POST",
+                        url: "/setUserName",
+                        data: { 
+                            "userId": userId,
+                            "userNameInp": userNameInpValue
+                        }
+                    })
+                    .done(function( response ) {
+                        console.log(response);
+
+                        if((response.api_status === SUCCESS_OK) && (response.status === USER_NAME_CHANGE_SUCCESS)){
+                            window.location.href = "/homePage";
+                        }
+                        else{
+                            alert( "Message: " + response.message );
+                        }
+
+
+                    });
+
+                    
+                }
+                else{
+
+                }
+                
+            });
+
 
             /* REMOVE
             const userQuery = query(ref(db,"Users"),orderByChild("userName"),equalTo(userNameInpValue.trim()));

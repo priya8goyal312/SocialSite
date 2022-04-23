@@ -28,11 +28,11 @@ themeSwitch.addEventListener("click",toggleTheme);
 
 // function to check if the user is logged in
 function checkIfLoggedIn(){
-    let loginStatus = localStorage.getItem('openionLoginStatus');
-    let userId = localStorage.getItem('openionUserId');
+    let loginStatus = localStorage.getItem('opinionLoginStatus');
+    let userId = localStorage.getItem('opinionUserId');
 
     if( !(loginStatus && userId) ){
-        window.location.href = "login.html";
+        window.location.href = "/loginPage";
     }
 
 }
