@@ -21,7 +21,7 @@ let userNameSelected = false;
 
 // Event Listener
 console.log("before checkIfUserNameAssigned");
-checkIfUserNameAssigned();
+// checkIfUserNameAssigned();
 console.log("after checkIfUserNameAssigned");
 
 console.log("before check");

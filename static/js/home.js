@@ -1,3 +1,6 @@
+import { SUCCESS_OK, USER_EXIST, USER_NOT_EXIST } from "./constants.js"
+
+
 // DOM elements 
 let sideNavBar = document.getElementById("sideNavBar");
 let menuButton = document.getElementById("menuButton");
@@ -6,13 +9,25 @@ let themeSwitch = document.getElementById("themeSwitch");
 let menuHeader = document.getElementById("menuHeader");
 let dateDisplay = document.getElementById("dateDisplay");
 
+let profileImage = document.getElementById("profileImage");
+let ownerActualName = document.getElementById("ownerActualName");
+let ownerUserName = document.getElementById("ownerUserName");
+let ownerBio = document.getElementById("ownerBio");
+let ownerPostCount = document.getElementById("ownerPostCount");
+let ownerFollowerCount = document.getElementById("ownerFollowerCount");
+let ownerFollowingCount = document.getElementById("ownerFollowingCount");
 
+
+
+let loginStatus;
+let userId;
 let date = new Date();
 let dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
 // initial call
 checkIfLoggedIn();
+loadOwnerProfile()
 showDate();
 // end
 
@@ -28,8 +43,8 @@ themeSwitch.addEventListener("click",toggleTheme);
 
 // function to check if the user is logged in
 function checkIfLoggedIn(){
-    let loginStatus = localStorage.getItem('opinionLoginStatus');
-    let userId = localStorage.getItem('opinionUserId');
+    loginStatus = localStorage.getItem('opinionLoginStatus');
+    userId = localStorage.getItem('opinionUserId');
 
     if( !(loginStatus && userId) ){
         window.location.href = "/loginPage";
@@ -56,7 +71,7 @@ function toggleTheme(){
 function showDate(){
     let currentDate = "";
     let currentMonth = "";
-    let currentyear = date.getFullYear();
+    let currentYear = date.getFullYear();
     let currentDay = date.getDay();
 
     if( date.getDate() < 10 ){
@@ -73,7 +88,47 @@ function showDate(){
         currentMonth = `${date.getMonth()}`;
     }
 
-    dateDisplay.innerText = `${currentDate} ${currentMonth} ${currentyear}, ${dayNames[currentDay]}`;
+    dateDisplay.innerText = `${currentDate} ${currentMonth} ${currentYear}, ${dayNames[currentDay]}`;
+}
+
+function loadOwnerProfile(){
+    console.log("load profile chala");
+
+    $.ajax({
+        method: "POST",
+        url: "/fetchOwnerProfile",
+        data: { 
+            "userId": userId
+        }
+    })
+    .done(function( response ) {
+        console.log(response);
+        if( (response.api_status === SUCCESS_OK) && (response.status === USER_EXIST) ){
+            if( response.data.user_profile_picture === "defaultAvatar" ){
+                profileImage.src = "static/images/defaultAvatar/SmilyAvatar.jpg";
+            }
+            else{
+                profileImage.src = response.data.user_profile_picture;
+            }
+            ownerActualName.innerText = response.data.user_actual_name;
+            ownerUserName.innerHTML = `<b>@</b> <i>${response.data.user_name}</i>`;
+            ownerBio.innerText = response.data.user_bio;
+            ownerPostCount.innerText = response.data.user_total_post;
+            ownerFollowerCount.innerText = response.data.user_total_follower;
+            ownerFollowingCount.innerText = response.data.user_total_following;
+
+        }
+        else if( (response.api_status === SUCCESS_OK) && (response.status === USER_NOT_EXIST) ){
+            localStorage.removeItem("opinionLoginStatus");
+            localStorage.removeItem("opinionUserId");
+
+            window.location.href = "/loginPage";
+        }
+        else{
+            alert( "Notice: " + response.message );
+        }
+
+    });
 }
 
 // end

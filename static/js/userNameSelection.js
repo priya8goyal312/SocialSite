@@ -149,12 +149,24 @@ function setUserName(){
                         console.log(response);
 
                         if((response.api_status === SUCCESS_OK) && (response.status === USER_NAME_CHANGE_SUCCESS)){
-                            window.location.href = "/homePage";
+
+                            $.ajax({
+                                method: "POST",
+                                url: "/makeProfile",
+                                data: { 
+                                    "userId": userId
+                                }
+                            })
+                            .done(function( response ) {
+                                console.log(response);
+
+
+                                window.location.href = "/homePage";
+                            });
                         }
                         else{
                             alert( "Message: " + response.message );
                         }
-
 
                     });
 
