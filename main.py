@@ -332,7 +332,7 @@ class MakeProfile(Resource):
     def post(self):
         print("********************************* in Make Profile (post method)")
 
-        userId = request.form.get("UserId")
+        userId = request.form.get("userId")
 
         # print(userId)
 
@@ -366,6 +366,155 @@ class MakeProfile(Resource):
 
         return jsonify(apiResponse)
         
+
+
+class FetchOwnerProfile(Resource):
+
+    def post(self):
+        print("********************************* in FetchOwnerProfile (post method)")
+
+        userId = request.form.get("userId")
+
+        # print(userId)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            userExist = User.query.filter_by( user_id = userId ).first()
+            profileExist = Profile.query.filter_by( user_id = userId ).first()
+
+            print(userExist)
+            print(profileExist)
+            
+            if userExist != None and profileExist != None:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_EXIST,
+                    "message": "profile fetched successfully",
+                    "data": {
+                        "user_id": profileExist.user_id,
+                        "user_name": userExist.user_name,
+                        "user_actual_name": profileExist.user_actual_name,
+                        "user_profile_picture": profileExist.user_profile_picture,
+                        "user_bio": profileExist.user_bio,
+                        "user_accout_view": profileExist.user_accout_view,
+                        "user_total_post": profileExist.user_total_post,
+                        "user_total_follower": profileExist.user_total_follower,
+                        "user_total_following": profileExist.user_total_following
+                    }
+                }
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NOT_EXIST,
+                    "message": "profile fetched failed",
+                }
+
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "status": PROFILE_NOT_CREATED,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+
+        return jsonify(apiResponse)
+
+
+class UpdateUserActualName(Resource):
+
+    def post(self):
+        print("********************************* in UpdateUserActualName (post method)")
+
+        userId = request.form.get("userId")
+        changedUserActualName = request.form.get("changedUserActualName")
+
+        # print(userId)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            profileExist = Profile.query.filter_by( user_id = userId ).first()
+           
+            # print(profileExist)
+            
+            if profileExist != None:
+                profileExist.user_actual_name = changedUserActualName
+                db.session.commit()
+
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_ACTUAL_NAME_CHANGE_SUCCESS,
+                    "message": "user actual name changed successfully",
+                }
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NOT_EXIST,
+                    "message": "user didn't exist",
+                }
+
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "status": USER_ACTUAL_NAME_CHANGE_FAIL,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+
+        return jsonify(apiResponse)
+
+
+
+
+class UpdateUserBio(Resource):
+
+    def post(self):
+        print("********************************* in UpdateBio (post method)")
+
+        userId = request.form.get("userId")
+        changedUserBio = request.form.get("changedUserBio")
+
+        # print(userId)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            profileExist = Profile.query.filter_by( user_id = userId ).first()
+           
+            # print(profileExist)
+            
+            if profileExist != None:
+                profileExist.user_bio = changedUserBio
+                db.session.commit()
+
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_BIO_CHANGE_SUCCESS,
+                    "message": "user bio changed successfully",
+                }
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NOT_EXIST,
+                    "message": "user didn't exist",
+                }
+
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "status": USER_BIO_CHANGE_FAIL,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+
+        return jsonify(apiResponse)
 
 # end
 
@@ -408,10 +557,17 @@ def homePage():
 
 api.add_resource(Signup,"/signup")
 api.add_resource(Login,"/login")
+
 api.add_resource(IsUserNameSelected,"/isUserNameSelected")
+
 api.add_resource(CheckUserNameAvailability,"/checkUserNameAvailability")
+
 api.add_resource(SetUserName,"/setUserName")
+
 api.add_resource(MakeProfile,"/makeProfile")
+api.add_resource(FetchOwnerProfile,"/fetchOwnerProfile")
+api.add_resource(UpdateUserActualName,"/profileUpdate/userActualName")
+api.add_resource(UpdateUserBio,"/profileUpdate/userBio")
 
 
 if  __name__ == "__main__":
