@@ -4,46 +4,46 @@ body {
 
 #sideNavBar {
   background-color: #FFFFFF;
-  height: 100vh;
-  width: 200px;
+  height: 98vh;
   position: absolute;
   z-index: 1010;
   box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
-  border-top-right-radius: 10px;
-  transition: left 0.5s ease-in-out;
+  border-radius: 10px;
+  transition: display 0.5s ease-in-out;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 #sideNavBar .navBarButtonImages {
   width: 25px;
   height: 25px;
 }
-#sideNavBar #menuHeader {
-  height: 120px;
-  width: 200px;
-}
 
 .navBarClose {
-  left: -200px;
+  display: none;
 }
 
 .navBarOpen {
-  left: 0px;
+  display: block;
 }
 
 .menuHeaderBackgroundDayMode {
-  height: 120px;
-  width: 200px;
+  height: 300px;
+  width: 100%;
   background-image: url("../images/backgrounds/navBarTopBarBG1.png");
   background-size: cover;
   background-repeat: no-repeat;
+  border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .menuHeaderBackgroundNightMode {
-  height: 120px;
-  width: 200px;
+  height: 300px;
+  width: 100%;
   background-image: url("../images/backgrounds/navBarTopBarBG2.png");
   background-size: cover;
   background-repeat: no-repeat;
+  border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
@@ -153,20 +153,51 @@ body {
   max-height: 300px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
 }
 
-#name {
+#ownerActualName {
   color: #3F3D56;
   font-size: 1.5rem;
   font-weight: 500;
   font-family: Arial, Helvetica, sans-serif;
 }
+@media screen and (max-width: 576px) {
+  #ownerActualName {
+    text-align: center;
+  }
+}
 
-#description {
+#ownerUserName {
+  color: #3F3D56;
+  font-size: 1.1 rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 576px) {
+  #ownerUserName {
+    text-align: center;
+  }
+}
+
+#ownerBio {
   color: #3F3D56;
   font-size: 1.1rem;
   font-weight: 400;
   font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 576px) {
+  #ownerBio {
+    text-align: center;
+  }
+}
+
+.statsHeading, .statsNumbers {
+  color: #3F3D56;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  line-height: 10px;
 }
 
 #divider {
