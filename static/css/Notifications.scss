@@ -1,0 +1,57 @@
+$primary-dark: #2F2E41;
+$primary-gray: #C3C3C3;
+$primary-pink: #FF6B95;
+$primary-white: #FFFFFF;
+$primary-yellow: #FFC796;
+
+$secondary-gray: #F2F2F2;
+
+$primary-border-radius: 10px;
+
+$sm: 576px;
+
+body{
+    background-color: white;
+}
+
+#base{
+    background-color: transparent;
+    height: 100vh;
+    width: 100vw;
+}
+#imagWrapper{
+    img{
+    height: 100%;
+    }
+}
+.commentsBox{
+    overflow-y: auto;
+}
+.profileImage{
+    height: 50px;
+    img{
+        height: 50px;
+        width: 50px; 
+        border-radius: 2.0rem;
+    }
+}
+.individualCommentBox{
+    position: relative;
+    .commenterContentBox{
+        p{
+            line-height: 10px;
+            border: 1px;
+        }
+    }
+}
+.commentsContainer{
+    overflow-y: auto;
+}
+.notificationTopBar{
+    background-color: $secondary-gray;
+    height: 80px;
+    .notificationTopBarName{
+     font-size: x-large;
+     font-weight: 400px;
+    }
+}
