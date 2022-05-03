@@ -1,6 +1,7 @@
 # from grpc import protos_and_services
 
 from email import message
+from email.policy import default
 from enum import unique
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
@@ -60,6 +61,15 @@ class Profile(db.Model):
     user_total_follower     = db.Column(db.Integer, unique=False, nullable=True)
     user_total_following    = db.Column(db.Integer, unique=False, nullable=True)
 
+class Posts(db.Model):
+    post_id = db.Column(db.Integer, primary_key=True)
+    post_owner_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=True)
+    date_of_upload = db.Column(db.String(20), unique=False, nullable=False, default="N/A")
+    post_content = db.Column(db.Text, unique=False, nullable=False, default="N/A")
+    post_caption = db.Column(db.String(100), unique=False, nullable=False, default="N/A")
+    like_count = db.Column(db.Integer, unique=False, nullable=False, default=0)
+
+
 
 
 # end
@@ -75,6 +85,7 @@ class Profile(db.Model):
 
 # api
 
+# REMOVE IT
 class TemplateForOtherClasses(Resource):
     def __init__(self):
         pass
@@ -88,13 +99,16 @@ class TemplateForOtherClasses(Resource):
     def delete(self):
         pass
 
-
+# REMOVE IT
 class LandingPage(Resource):
 
     def get(self):
         return render_template('index.html')
 
 
+
+
+# REMOVE IT
 class HelloWorld(Resource):
     def __init__(self):
         pass
@@ -107,6 +121,10 @@ class HelloWorld(Resource):
         return dummyDict
 
 
+
+
+
+# api for user sign up 
 class Signup(Resource):
     def __init__(self):
         pass
@@ -161,6 +179,9 @@ class Signup(Resource):
         
 
 
+
+
+# api for user login
 class Login(Resource):
 
     def post(self):
@@ -202,6 +223,8 @@ class Login(Resource):
 
 
 
+
+# api for checking if the user name is selected
 class IsUserNameSelected(Resource):
 
     def post(self):
@@ -253,6 +276,9 @@ class IsUserNameSelected(Resource):
 
 
 
+
+
+#api for checkusernameavailability
 class CheckUserNameAvailability(Resource):
 
     def post(self):
@@ -293,6 +319,9 @@ class CheckUserNameAvailability(Resource):
 
 
 
+
+
+#api for setusername
 class SetUserName(Resource):
 
     def post(self):
@@ -327,6 +356,10 @@ class SetUserName(Resource):
         return jsonify(apiResponse)
 
 
+
+
+
+#api for makeprofile
 class MakeProfile(Resource):
 
     def post(self):
@@ -368,6 +401,9 @@ class MakeProfile(Resource):
         
 
 
+
+
+#api for fetchownerprofile
 class FetchOwnerProfile(Resource):
 
     def post(self):
@@ -423,6 +459,10 @@ class FetchOwnerProfile(Resource):
         return jsonify(apiResponse)
 
 
+
+
+
+#api for updateuseractualname
 class UpdateUserActualName(Resource):
 
     def post(self):
@@ -467,6 +507,7 @@ class UpdateUserActualName(Resource):
 
 
         return jsonify(apiResponse)
+
 
 
 
@@ -516,6 +557,121 @@ class UpdateUserBio(Resource):
 
         return jsonify(apiResponse)
 
+
+
+
+
+class UploadPic(Resource):
+    def post(self):
+        print("*************************************** in upload pic(post method)")
+
+        ownerUserId = request.form.get("ownerUserId")
+        dateOfUpload = request.form.get("dateOfUpload")
+        postContent = request.form.get("postContent")
+        postCaption = request.form.get("postCaption")
+
+        print(ownerUserId, dateOfUpload, postContent, postCaption)
+
+        apiResponse = {}
+
+        try:
+            
+            postEntry = Posts( post_owner_id = ownerUserId, date_of_upload = dateOfUpload, post_content = postContent, post_caption = postCaption)
+            db.session.add(postEntry)
+            db.session.commit()
+
+            apiResponse = {
+                "api_status": SUCCESS_OK,
+                "status": POST_CREATED,
+                "message": "post created successfully"
+            }
+
+
+        except Exception as e:
+            print(e)
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "status": POST_NOT_CREATED,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+
+        return jsonify(apiResponse)
+
+
+
+
+
+class FetchAllProfilePost(Resource):
+
+    def post(self):
+        print("*************************************** in fetchAllProfilePost (post method)")
+
+
+        userId = request.form.get("userId")
+        print(userId)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            profileExist = Profile.query.filter_by( user_id = userId ).first()
+            print(profileExist)
+
+            if profileExist != None:
+                    
+                allProfilePosts =  Posts.query.filter_by( post_owner_id = userId ).all()
+
+                print(allProfilePosts)
+
+                if len(allProfilePosts) == 0:
+                    apiResponse = {
+                        "api_status": SUCCESS_OK,
+                        "status": POSTS_NOT_EXIST,
+                        "message": "no posts to show"
+                    }
+
+                else:
+                    postsList = []
+                    for postIter in allProfilePosts:
+                        postData = {
+                            "postId" : postIter.post_id,
+                            "dateOfUpload" : postIter.date_of_upload,
+                            "post_content" : postIter.post_content,
+                            "post_caption" : postIter.post_caption,
+                            "like_count" : postIter.like_count
+                        }
+
+                        postsList.append(postData)
+                    
+                    apiResponse = {
+                        "api_status": SUCCESS_OK,
+                        "status": POSTS_EXIST,
+                        "message": "user posts found",
+                        "total_posts": len(postsList),
+                        "posts": postsList
+                    }
+
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NOT_EXIST,
+                    "message": "user didn't exist"
+                }
+
+        except Exception as e:
+            print(e)
+
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server"
+            }
+
+        return apiResponse
+
+
+
+
+
 # end
 
 
@@ -548,8 +704,16 @@ def userNameSelectionPage():
 def homePage():
    return render_template('home.html')
 
+@app.route('/postUploadPage')
+def postUploadPage():
+   return render_template('upload.html')
 
 # end
+
+
+
+
+
 
 
 
@@ -568,6 +732,18 @@ api.add_resource(MakeProfile,"/makeProfile")
 api.add_resource(FetchOwnerProfile,"/fetchOwnerProfile")
 api.add_resource(UpdateUserActualName,"/profileUpdate/userActualName")
 api.add_resource(UpdateUserBio,"/profileUpdate/userBio")
+
+api.add_resource(UploadPic,"/postUpload")
+api.add_resource(FetchAllProfilePost,"/fetchAllProfilePost")
+
+
+
+
+
+
+
+
+
 
 
 if  __name__ == "__main__":
