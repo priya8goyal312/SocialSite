@@ -1,4 +1,4 @@
-import { SUCCESS_OK, USER_EXIST, USER_NOT_EXIST } from "./constants.js"
+import { SUCCESS_OK, USER_EXIST, USER_NOT_EXIST, POSTS_EXIST, POSTS_NOT_EXIST  } from "./constants.js"
 
 
 // DOM elements 
@@ -8,6 +8,7 @@ let menuCloseButton = document.getElementById("menuCloseButton");
 let themeSwitch = document.getElementById("themeSwitch");
 let menuHeader = document.getElementById("menuHeader");
 let dateDisplay = document.getElementById("dateDisplay");
+let addPostButton = document.getElementById("addPostButton");
 
 let profileImage = document.getElementById("profileImage");
 let ownerActualName = document.getElementById("ownerActualName");
@@ -16,6 +17,8 @@ let ownerBio = document.getElementById("ownerBio");
 let ownerPostCount = document.getElementById("ownerPostCount");
 let ownerFollowerCount = document.getElementById("ownerFollowerCount");
 let ownerFollowingCount = document.getElementById("ownerFollowingCount");
+
+let postPreviewContainer = document.getElementById("postPreviewContainer");
 
 
 
@@ -29,6 +32,7 @@ let dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 checkIfLoggedIn();
 loadOwnerProfile()
 showDate();
+loadPosts();
 // end
 
 
@@ -36,6 +40,7 @@ showDate();
 menuButton.addEventListener("click",toggleMenu);
 menuCloseButton.addEventListener("click",toggleMenu);
 themeSwitch.addEventListener("click",toggleTheme);
+addPostButton.addEventListener("click", redirectToPost)
 // end
 
 
@@ -64,6 +69,10 @@ function toggleTheme(){
     menuHeader.classList.toggle("menuHeaderBackgroundNightMode");
 
     // TOGGLE FUNCTIONALITY NOT COMPLETE
+}
+
+function redirectToPost(){
+    window.location.href = "/postUploadPage";
 }
 
 
@@ -123,6 +132,45 @@ function loadOwnerProfile(){
             localStorage.removeItem("opinionUserId");
 
             window.location.href = "/loginPage";
+        }
+        else{
+            alert( "Notice: " + response.message );
+        }
+
+    });
+}
+
+
+
+function loadPosts(){
+    $.ajax({
+        method: "POST",
+        url: "/fetchAllProfilePost",
+        data: { 
+            "userId": userId
+        }
+    })
+    .done(function( response ) {
+        // console.log(response);
+        if( (response.api_status === SUCCESS_OK) && (response.status === POSTS_EXIST) ){
+            let postPreviewContainerInnerStuff = ""
+
+            response.posts.forEach(post => {
+                postPreviewContainerInnerStuff = postPreviewContainerInnerStuff + 
+                `
+                <div class="postPreviewBox col-4 p-1">
+                    <div class="postPreviewInnerBox d-flex justify-content-center">
+                        <img class="img-fluid" src="${post.post_content}">
+                    </div>
+                </div>
+                `
+            });
+
+            postPreviewContainer.innerHTML =  postPreviewContainerInnerStuff;
+
+        }
+        else if( (response.api_status === SUCCESS_OK) && (response.status === POSTS_NOT_EXIST) ){
+            postPreviewContainer.innerHTML = '<p class="col-12" style="text-align: center; font-weight: 600; color: grey;"> No post </p>';
         }
         else{
             alert( "Notice: " + response.message );

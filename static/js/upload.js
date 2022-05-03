@@ -1,4 +1,6 @@
 import { sRef, storage, ref, uploadBytesResumable, getDownloadURL } from "./firebaseConfig.js"; 
+import { SUCCESS_OK, POST_CREATED} from "./constants.js"
+
 
 let date = new Date();
 let months = ["January", "February", "March", "April","May","June", "July", "August", "September", "October", "November", "December"];
@@ -15,10 +17,12 @@ let imageToUploadPreview = document.getElementById("imageToUploadPreview");
 let overlayBox = document.getElementById("overlayBox");
 let todaysDate = document.getElementById("todaysDate");
 let actualImageInput = document.getElementById("actualImageInput");
+let captionInp = document.getElementById("captionInp");
 let invalidFileWarningText= document.getElementById("invalidFileWarningText");
 let reselectButton = document.getElementById("reselectButton");
 let postButton = document.getElementById("postButton");
 let progressBarActualProgress = document.getElementById("progressBarActualProgress");
+let uploadStatusText = document.getElementById("uploadStatusText");
 
 // initial function call
 dateUpdate();
@@ -74,7 +78,7 @@ function showPreview(){
         }
     }
     else{
-        invalidFileWarningText.innerText = "invalid file, file must not containe more than one .(period/dot) in its name";
+        invalidFileWarningText.innerText = "invalid file, file must not contains more than one .(period/dot) in its name";
         invalidFileWarningText.style.display = "block";
     }
 
@@ -98,36 +102,64 @@ function showPreview(){
 
 
 function uploadFile(){
-    progressBarActualProgress.style.width = `${0}%`;
+    // progressBarActualProgress.style.width = `${0}%`;
+
+    uploadStatusText.innerText = "Upload in progress ...";
+    uploadStatusText.classList.toggle("uploadStatusTextProgress");
+    uploadStatusText.style.display = "block";
+    
+    
 
     console.log(isValidFile);
     if( isValidFile === true){
         console.log("upload initiated");
         let imageToUpload = actualImageInput.files[0];
-        let imageName = imageToUpload.name;
+        let fileReader = new FileReader();
+
+        let base64EncodedStringOfImageToUpload;
         
-        const metaData = {
-            contentType : imageToUpload.type
-        }
+        fileReader.readAsDataURL(imageToUpload);
+        fileReader.onload = function(){
+            // fileReader.result gives the base64 image
+            // console.log(fileReader.result);
+    
+            base64EncodedStringOfImageToUpload = fileReader.result;
+            console.log(base64EncodedStringOfImageToUpload);
 
-        const storageRef = sRef(storage,"Image/"+imageName);
-        const uploadTask = uploadBytesResumable(storageRef,imageToUpload,metaData);
+            date = new Date();
+            $.ajax({
+                method: "POST",
+                url: "/postUpload",
+                data: { 
+                    ownerUserId: localStorage.getItem("opinionUserId"),
+                    dateOfUpload: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}, ${day[date.getDay()]}`,
+                    postContent: base64EncodedStringOfImageToUpload,
+                    postCaption: (captionInp.value.trim().length === 0)?"...":captionInp.value.trim(),
+                }
+            })
+            .done(function( response ) {
+                if((response.api_status === SUCCESS_OK) && (response.status === POST_CREATED)){
+                    console.log("successful raha");
 
-        uploadTask.on("state-changed",(snapshot)=>{
-            let progress = ( snapshot.bytesTransferred/snapshot.totalBytes )*100;
-            console.log(progress);
-            progressBarActualProgress.style.width = `${progress+1}%`;
-            
-        },
-        (error)=>{
-            console.log("error aa gai h image upload m");
-        },
-        ()=>{
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-                console.log(downloadURL);
+                    uploadStatusText.innerText = "Post uploaded successfully";
+                    uploadStatusText.classList.toggle("uploadStatusTextProgress");
+                    uploadStatusText.classList.toggle("uploadStatusTextSuccess");
+                    uploadStatusText.style.display = "block";
+                }
+                else{
+                    console.log("unsuccessful raha");
+
+                    uploadStatusText.innerText = "Post uploaded failed";
+                    uploadStatusText.classList.toggle("uploadStatusTextProgress");
+                    uploadStatusText.classList.toggle("uploadStatusTextFail");
+                    uploadStatusText.style.display = "block";
+                }
+
+                setTimeout( redirectToHome , 3000);
             });
-        });
 
+        }
+        
     }
     else{
         invalidFileWarningText.innerText = "select a valid file to upload";
@@ -135,6 +167,10 @@ function uploadFile(){
     }
 }
 
+
+function redirectToHome(){
+    window.location.href="/homePage";
+}
 /*
 function uploadProgress(){
     let width = 0;
