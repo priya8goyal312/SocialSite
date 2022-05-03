@@ -191,7 +191,8 @@ body {
   }
 }
 
-.statsHeading, .statsNumbers {
+.statsHeading,
+.statsNumbers {
   color: #3F3D56;
   font-size: 1.1rem;
   font-weight: 600;
@@ -208,5 +209,15 @@ body {
   height: 200px;
 }
 .postPreviewBox .postPreviewInnerBox {
+  background-color: #C3C3C3;
   border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.postPreviewBox .postPreviewInnerBox img {
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
 }/*# sourceMappingURL=home.css.map */
