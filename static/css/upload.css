@@ -99,4 +99,21 @@
 #progressBarActualProgress {
   width: 0%;
   background-color: #FF6B95;
+}
+
+#uploadStatusText {
+  text-align: center;
+  font-weight: 600;
+}
+
+.uploadStatusTextProgress {
+  color: #FFC796;
+}
+
+.uploadStatusTextSuccess {
+  color: green;
+}
+
+.uploadStatusTextFail {
+  color: #FF6B95;
 }/*# sourceMappingURL=upload.css.map */

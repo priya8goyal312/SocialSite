@@ -127,3 +127,20 @@ body{
     width: 0%;
     background-color: $primary-pink;
 }
+
+#uploadStatusText{
+    text-align: center;
+    font-weight: 600;
+}
+
+.uploadStatusTextProgress{
+    color: $primary-yellow;
+}
+
+.uploadStatusTextSuccess{
+    color: green;
+}
+
+.uploadStatusTextFail{
+    color: $primary-pink;
+}
