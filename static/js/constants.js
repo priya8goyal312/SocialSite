@@ -75,9 +75,13 @@ let SERVER_ERROR_NETWORK_AUTHENTICATED_REQUIRED = 511
 let USER_EXIST = 10
 let EMAIL_EXIST = 11
 let USER_NAME_EXIST = 12
+let POSTS_EXIST = 13
 
 // Created status
 let USER_CREATED = 20
+let PROFILE_CREATED = 21
+let POST_CREATED = 23
+
 
 // Update status
 let USER_NAME_UPDATE = 30
@@ -85,6 +89,8 @@ let USER_NAME_UPDATE = 30
 // Not-Exist status
 let USER_NOT_EXIST = 40
 let USER_NAME_DOES_NOT_EXIST = 41
+let POSTS_NOT_EXIST = 42
+
 
 // Selected
 let USER_NAME_SELECTED = 50
@@ -107,6 +113,8 @@ let USER_PROFILE_VIEW_PERMISSION_CHANGE_FAIL = 79
 // Not created status
 let USER_NOT_CREATED = 80
 let PROFILE_NOT_CREATED = 81
+let POST_NOT_CREATED = 82
+
 
 export{
 
@@ -186,9 +194,13 @@ export{
     USER_EXIST,
     EMAIL_EXIST,
     USER_NAME_EXIST,
+    POSTS_EXIST,
     
     // Created status
     USER_CREATED,
+    PROFILE_CREATED,
+    POST_CREATED,
+
     
     // Update status
     USER_NAME_UPDATE,
@@ -196,6 +208,7 @@ export{
     // Not-Exist status
     USER_NOT_EXIST,
     USER_NAME_DOES_NOT_EXIST,
+    POSTS_NOT_EXIST,
 
     // selected
     USER_NAME_SELECTED,
@@ -217,6 +230,7 @@ export{
 
     // Not created status
     USER_NOT_CREATED,
-    PROFILE_NOT_CREATED 
+    PROFILE_NOT_CREATED,
+    POST_NOT_CREATED
 
 }
