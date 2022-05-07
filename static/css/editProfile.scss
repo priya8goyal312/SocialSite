@@ -1,0 +1,78 @@
+$primary-dark: #2F2E41;
+$primary-gray: #C3C3C3;
+$primary-pink: #FF6B95;
+$primary-white: #FFFFFF;
+$primary-yellow: #FFC796;
+
+$secondary-gray: #F2F2F2;
+
+$primary-border-radius: 10px;
+
+$sm: 576px;
+
+body{
+    background-color: white;
+    // background-image: url(../images/backgrounds/landingpageBG3.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: bottom;
+}
+
+#base{
+    background-color: $secondary-gray;
+    // background-image: url(../images/backgrounds/landingpageBG2.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: top;
+    height: 100vh;
+    // width: 100vw;
+    overflow-y: auto;
+}
+.changeImage{
+    background-color: $primary-white;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 300px;
+    border-radius: $primary-border-radius;
+    aspect-ratio: 1 / 1;
+    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+.button{
+        width: 120px;
+        height: 40px;
+        background-color: $primary-yellow;
+        border: none;
+        border-radius: 10px;
+        color: rgba($primary-dark,1.0);
+        font-weight: 600;
+        transition: 0.2s;
+    
+        &:hover{
+            color: rgba($primary-white,1.0);
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.4);
+        }
+    }
+.input{
+    border-radius: $primary-border-radius;
+    border: 2px solid $primary-yellow;
+
+}
+label{
+    color: $primary-dark;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.profileSettingsTopBar{
+    background-color: $primary-white;
+    height: 80px;
+    .profileSettingTopBarName {
+     font-size: x-large;
+     font-weight: 400px;
+    }
+}
+.warningText{
+    color: rgb(255, 65, 65);
+    font-weight: 500;
+    // display: none;
+}
