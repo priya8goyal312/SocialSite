@@ -3,7 +3,10 @@
 # HTTP Request Status Codes
 
 # Informational
+from http.client import ACCEPTED
 from site import USER_BASE
+
+from zmq import CONNECT_TIMEOUT
 
 
 INFORMATIONAL_CONTINUE = 100 
@@ -124,8 +127,20 @@ USER_NOT_CREATED = 80
 PROFILE_NOT_CREATED = 81
 POST_NOT_CREATED = 82
 
+# connection
+CONNECTION_CONNECTED = 91
+CONNECTION_PENDING = 92
+ALREADY_CONNECTED = 93
 
 
+
+
+## connection status
+
+PENDING = 0
+ACCEPTED = 1
+REJECTED = 2
+BLOCKED = 3
 
 
 def sayImported():
