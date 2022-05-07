@@ -3,6 +3,7 @@
 from email import message
 from email.policy import default
 from enum import unique
+from django.shortcuts import render
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
 from grpc import Status
@@ -70,7 +71,11 @@ class Posts(db.Model):
     like_count = db.Column(db.Integer, unique=False, nullable=False, default=0)
 
 
-
+class Connections(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=True)
+    followee_id  = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=True)
+    connection_status = db.Column(db.Integer, nullable=True)
 
 # end
 
@@ -511,7 +516,7 @@ class UpdateUserActualName(Resource):
 
 
 
-
+#api for updateuserbio
 class UpdateUserBio(Resource):
 
     def post(self):
@@ -560,7 +565,7 @@ class UpdateUserBio(Resource):
 
 
 
-
+#api for uploadpic
 class UploadPic(Resource):
     def post(self):
         print("*************************************** in upload pic(post method)")
@@ -579,6 +584,11 @@ class UploadPic(Resource):
             postEntry = Posts( post_owner_id = ownerUserId, date_of_upload = dateOfUpload, post_content = postContent, post_caption = postCaption)
             db.session.add(postEntry)
             db.session.commit()
+
+            userProfile = Profile.query.filter_by( user_id = ownerUserId ).first()
+            userProfile.user_total_post = userProfile.user_total_post + 1 
+            db.session.commit()
+
 
             apiResponse = {
                 "api_status": SUCCESS_OK,
@@ -601,7 +611,7 @@ class UploadPic(Resource):
 
 
 
-
+#api for fetchprofilepost
 class FetchAllProfilePost(Resource):
 
     def post(self):
@@ -671,6 +681,87 @@ class FetchAllProfilePost(Resource):
 
 
 
+#api for makefollowrequest
+class MakeFollowRequest(Resource):
+
+    def post(self):
+        print("*************************************** in MakeFollowRequest (post method)")
+
+
+        followerId = request.form.get("followerId")
+        followeeId = request.form.get("followeeId")
+
+
+        print(followerId, followeeId)
+
+        apiResponse = {} # making a empty dict variable
+        
+        try:
+            followerIdExist = User.query.filter_by( user_id = followerId ).first()
+            followeeIdExist = User.query.filter_by( user_id = followeeId ).first()
+            print(followerIdExist, followeeIdExist)
+
+            
+            if (followerIdExist != None) and (followeeIdExist != None):
+                
+                connectionsExist = Connections.query.filter_by( follower_id = followerId, followee_id = followeeId).first()
+                print(connectionsExist)
+                if(connectionsExist == None):
+                    followeeUser = Profile.query.filter_by( user_id = followeeId ).first()
+                    print( followeeUser.user_id, followeeUser.user_accout_view )
+
+                    if( followeeUser.user_accout_view == "private" ):
+                        connectionsEntry = Connections( follower_id = followerId, followee_id = followeeId, connection_status = PENDING )
+
+                        apiResponse = {
+                            "api_status": SUCCESS_OK,
+                            "status": CONNECTION_PENDING,
+                            "message": "connection request sent"
+                        }
+
+                    else:
+                        connectionsEntry = Connections(follower_id = followerId, followee_id = followeeId, connection_status = ACCEPTED)
+                        followeeUser.user_total_follower = followeeUser.user_total_follower + 1
+                        db.session.commit()
+                        
+                        apiResponse = {
+                            "api_status": SUCCESS_OK,
+                            "status": CONNECTION_CONNECTED,
+                            "message": "connection made"
+                        }
+                        
+                    db.session.add(connectionsEntry)
+                    db.session.commit()
+
+                else:
+                    apiResponse = {
+                        "api_status": SUCCESS_OK,
+                        "status": ALREADY_CONNECTED,
+                        "message": "connection already exist"
+                    }
+
+                
+            else:
+                apiResponse = {
+                    "api_status": SUCCESS_OK,
+                    "status": USER_NOT_EXIST,
+                    "message": "user didn't exist"
+                }
+
+
+        except Exception as e:
+            print(e)
+
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server"
+            }
+        
+
+        return apiResponse
+
+
+
 
 # end
 
@@ -735,6 +826,8 @@ api.add_resource(UpdateUserBio,"/profileUpdate/userBio")
 
 api.add_resource(UploadPic,"/postUpload")
 api.add_resource(FetchAllProfilePost,"/fetchAllProfilePost")
+
+api.add_resource(MakeFollowRequest,"/makeFollowRequest")
 
 
 
