@@ -22,6 +22,12 @@ let postPreviewContainer = document.getElementById("postPreviewContainer");
 
 
 
+let MenuHomeButton = document.getElementById("MenuHomeButton");
+let MenuProfileButton = document.getElementById("MenuProfileButton");
+let MenuNotificationButton = document.getElementById("MenuNotificationButton");
+let MenuSettingButton = document.getElementById("MenuSettingButton");
+
+
 let loginStatus;
 let userId;
 let date = new Date();
@@ -40,7 +46,13 @@ loadPosts();
 menuButton.addEventListener("click",toggleMenu);
 menuCloseButton.addEventListener("click",toggleMenu);
 themeSwitch.addEventListener("click",toggleTheme);
-addPostButton.addEventListener("click", redirectToPost)
+addPostButton.addEventListener("click", redirectToPost);
+
+
+MenuHomeButton.addEventListener("click",displaySection);
+MenuProfileButton.addEventListener("click",displaySection);
+MenuNotificationButton.addEventListener("click",displaySection);
+MenuSettingButton.addEventListener("click",displaySection);
 // end
 
 
@@ -73,6 +85,21 @@ function toggleTheme(){
 
 function redirectToPost(){
     window.location.href = "/postUploadPage";
+}
+
+function displaySection(){
+    let AllSection = document.querySelectorAll("section");
+    for( let sec of AllSection){
+        // console.log(sec);
+        if(sec.id === this.dataset.sectionToShow){
+            sec.classList.toggle("d-none"); // remove none which is already applied
+            sec.classList.toggle("d-flex"); // apply flex which is not applied
+        }
+        else{
+            sec.classList.toggle("d-flex"); // remove flex which is already applied
+            sec.classList.toggle("d-none"); // apply none which is not applied
+        }
+    }
 }
 
 

@@ -3,6 +3,7 @@
 from email import message
 from email.policy import default
 from enum import unique
+from http.client import FOUND
 from django.shortcuts import render
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
@@ -10,6 +11,7 @@ from flask_restful import Resource, Api
 #from joblib import PrintTime
 from requests import delete
 from flask_sqlalchemy import SQLAlchemy
+from sklearn.datasets import fetch_california_housing
 from sqlalchemy import true
 from flask import jsonify
 import utility
@@ -283,7 +285,7 @@ class IsUserNameSelected(Resource):
 
 
 
-#api for checkusernameavailability
+#api for checking if the user name is available
 class CheckUserNameAvailability(Resource):
 
     def post(self):
@@ -326,7 +328,7 @@ class CheckUserNameAvailability(Resource):
 
 
 
-#api for setusername
+#api for setting the user name
 class SetUserName(Resource):
 
     def post(self):
@@ -364,7 +366,7 @@ class SetUserName(Resource):
 
 
 
-#api for makeprofile
+#api for making profile
 class MakeProfile(Resource):
 
     def post(self):
@@ -408,7 +410,7 @@ class MakeProfile(Resource):
 
 
 
-#api for fetchownerprofile
+#api for fetching owner profile
 class FetchOwnerProfile(Resource):
 
     def post(self):
@@ -467,7 +469,7 @@ class FetchOwnerProfile(Resource):
 
 
 
-#api for updateuseractualname
+#api for updating actual name of user
 class UpdateUserActualName(Resource):
 
     def post(self):
@@ -516,7 +518,8 @@ class UpdateUserActualName(Resource):
 
 
 
-#api for updateuserbio
+
+#api for updating the bio of user
 class UpdateUserBio(Resource):
 
     def post(self):
@@ -565,7 +568,8 @@ class UpdateUserBio(Resource):
 
 
 
-#api for uploadpic
+
+#api for uploading the post
 class UploadPic(Resource):
     def post(self):
         print("*************************************** in upload pic(post method)")
@@ -611,7 +615,8 @@ class UploadPic(Resource):
 
 
 
-#api for fetchprofilepost
+
+#api for fetching posts made by user
 class FetchAllProfilePost(Resource):
 
     def post(self):
@@ -676,12 +681,13 @@ class FetchAllProfilePost(Resource):
                 "message": "Oops! seems like some error occurred server"
             }
 
-        return apiResponse
+        return jsonify(apiResponse)
 
 
 
 
-#api for makefollowrequest
+
+#api for making a follow request
 class MakeFollowRequest(Resource):
 
     def post(self):
@@ -758,10 +764,126 @@ class MakeFollowRequest(Resource):
             }
         
 
-        return apiResponse
+        return jsonify(apiResponse)
 
 
 
+
+
+# api for finding user
+class FindUsers(Resource):
+    def post(self):
+        print("*************************************** in FindUsers (post method)")
+
+
+        userNameToFound = request.form.get("userNameToFound")
+
+
+        print(userNameToFound)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            matchedUsers = None
+            allMatchedUser = []
+
+            if userNameToFound == "_":
+                matchedUsers = User.query.all()
+
+            else:
+                matchedUsers = User.query.filter( User.user_name.like(f"%{userNameToFound}%") ).all()
+
+            
+            for user in matchedUsers:
+                allMatchedUser.append({
+                    "userId": user.user_id,
+                    "userName" : user.user_name
+                })
+            
+            if(len(matchedUsers)>0):
+                apiResponse = {
+                    "api_status": USER_EXIST,
+                    "message": "User found",
+                    "data": allMatchedUser
+                }
+            else:
+                apiResponse = {
+                    "api_status": USER_NOT_EXIST,
+                    "message": "Users not found"
+                }
+
+        except Exception as e:
+            print(e)
+
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server"
+            }
+        
+
+        return jsonify(apiResponse)
+  
+
+
+
+
+class ListPendingRequest(Resource):
+    def post(self):
+        print("*************************************** in ListPendingRequest (post method)")
+
+
+        userID = request.form.get("userId")
+
+
+        print(userID)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            fetchedRequest = db.session.query(User, Connections).outerjoin(Connections, User.user_id == Connections.follower_id).filter(Connections.followee_id == userID).all()
+
+            if len(fetchedRequest) > 0:
+
+                allMatchedUser = []
+
+                
+                for user in fetchedRequest:
+                    print(user)
+                    
+                    allMatchedUser.append({
+                        "userId": user[0].user_id,
+                        "userName" : user[0].user_name
+                    })
+                
+            
+
+
+                apiResponse = {
+                    "api_status": USER_EXIST,
+                    "message": "User found",
+                    "data": allMatchedUser
+                }
+            
+            else:
+                apiResponse = {
+                    "api_status": USER_NOT_EXIST,
+                    "message": "Users not found"
+                }
+
+
+
+        except Exception as e:
+            print(e)
+
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server"
+            }
+        
+
+
+
+        return jsonify(apiResponse)
 
 # end
 
@@ -828,6 +950,8 @@ api.add_resource(UploadPic,"/postUpload")
 api.add_resource(FetchAllProfilePost,"/fetchAllProfilePost")
 
 api.add_resource(MakeFollowRequest,"/makeFollowRequest")
+api.add_resource(FindUsers,"/findUsers")
+api.add_resource(ListPendingRequest,"/listPendingRequest")
 
 
 

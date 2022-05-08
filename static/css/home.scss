@@ -19,6 +19,29 @@ body {
     // background-position-y: bottom;
 }
 
+.base{
+    background-color: $secondary-gray;
+    // background-image: url(../images/backgrounds/landingpageBG2.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position-y: top;
+
+    height: calc(100vh - 3rem);
+    overflow-y: auto;
+
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+
+
 // nav bar 
 
 #sideNavBar {
@@ -112,6 +135,12 @@ body {
 
 
 
+// top bar
+#homeTopBar {
+    height: 3rem;
+    background-color: $secondary-gray;
+}
+// 
 
 // profile section
 #ProfileSection {
@@ -120,32 +149,30 @@ body {
     // background-size: contain;
     // background-repeat: no-repeat;
     // background-position-y: top;
-    height: 100vh;
+    height: calc(100vh - 3rem);
     width: 100vw;
     overflow-y: auto;
     position: absolute;
+    top: 3rem;
     z-index: 1000;
 }
 
-#homeParent {
-    min-height: 100vh;
-    height: auto;
-    overflow-y: auto;
+// #homeParent {
+//     min-height: calc(100vh - 3rem);
+//     max-height: calc(100vh - 3rem);
+//     height: auto;
+//     overflow-y: auto;
 
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
+//     -ms-overflow-style: none;
+//     /* IE and Edge */
+//     scrollbar-width: none;
+//     /* Firefox */
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
+//     &::-webkit-scrollbar {
+//         display: none;
+//     }
+// }
 
-#homeTopBar {
-    height: 3rem;
-    background-color: $secondary-gray;
-}
 
 .avatar {
     width: 2.5rem;

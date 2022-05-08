@@ -2,6 +2,19 @@ body {
   background-color: white;
 }
 
+.base {
+  background-color: #F2F2F2;
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.base::-webkit-scrollbar {
+  display: none;
+}
+
 #sideNavBar {
   background-color: #FFFFFF;
   height: 98vh;
@@ -85,31 +98,19 @@ body {
   font-weight: 500;
 }
 
-#ProfileSection {
-  background-color: transparent;
-  height: 100vh;
-  width: 100vw;
-  overflow-y: auto;
-  position: absolute;
-  z-index: 1000;
-}
-
-#homeParent {
-  min-height: 100vh;
-  height: auto;
-  overflow-y: auto;
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-#homeParent::-webkit-scrollbar {
-  display: none;
-}
-
 #homeTopBar {
   height: 3rem;
   background-color: #F2F2F2;
+}
+
+#ProfileSection {
+  background-color: transparent;
+  height: calc(100vh - 3rem);
+  width: 100vw;
+  overflow-y: auto;
+  position: absolute;
+  top: 3rem;
+  z-index: 1000;
 }
 
 .avatar {

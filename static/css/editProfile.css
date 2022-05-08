@@ -1,11 +1,11 @@
-body {
-  background-color: white;
-}
-
-#base {
-  background-color: #F2F2F2;
-  height: 100vh;
+#SettingSection {
+  background-color: transparent;
+  height: calc(100vh - 3rem);
+  width: 100vw;
   overflow-y: auto;
+  position: absolute;
+  top: 3rem;
+  z-index: 1000;
 }
 
 .changeImage {

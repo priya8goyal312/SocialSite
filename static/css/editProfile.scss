@@ -10,25 +10,21 @@ $primary-border-radius: 10px;
 
 $sm: 576px;
 
-body{
-    background-color: white;
-    // background-image: url(../images/backgrounds/landingpageBG3.png);
-    // background-size: contain;
-    // background-repeat: no-repeat;
-    // background-position-y: bottom;
-}
-
-#base{
-    background-color: $secondary-gray;
+#SettingSection {
+    background-color: transparent;
     // background-image: url(../images/backgrounds/landingpageBG2.png);
     // background-size: contain;
     // background-repeat: no-repeat;
     // background-position-y: top;
-    height: 100vh;
-    // width: 100vw;
+    height: calc(100vh - 3rem);
+    width: 100vw;
     overflow-y: auto;
+    position: absolute;
+    top: 3rem;
+    z-index: 1000;
 }
-.changeImage{
+
+.changeImage {
     background-color: $primary-white;
     min-width: 200px;
     min-height: 200px;
@@ -36,42 +32,48 @@ body{
     max-height: 300px;
     border-radius: $primary-border-radius;
     aspect-ratio: 1 / 1;
-    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
-.button{
-        width: 120px;
-        height: 40px;
-        background-color: $primary-yellow;
-        border: none;
-        border-radius: 10px;
-        color: rgba($primary-dark,1.0);
-        font-weight: 600;
-        transition: 0.2s;
-    
-        &:hover{
-            color: rgba($primary-white,1.0);
-            box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.4);
-        }
+
+.button {
+    width: 120px;
+    height: 40px;
+    background-color: $primary-yellow;
+    border: none;
+    border-radius: 10px;
+    color: rgba($primary-dark, 1.0);
+    font-weight: 600;
+    transition: 0.2s;
+
+    &:hover {
+        color: rgba($primary-white, 1.0);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
     }
-.input{
+}
+
+.input {
     border-radius: $primary-border-radius;
     border: 2px solid $primary-yellow;
 
 }
-label{
+
+label {
     color: $primary-dark;
     font-size: 1rem;
     font-weight: 500;
 }
-.profileSettingsTopBar{
+
+.profileSettingsTopBar {
     background-color: $primary-white;
     height: 80px;
+
     .profileSettingTopBarName {
-     font-size: x-large;
-     font-weight: 400px;
+        font-size: x-large;
+        font-weight: 400px;
     }
 }
-.warningText{
+
+.warningText {
     color: rgb(255, 65, 65);
     font-weight: 500;
     // display: none;
