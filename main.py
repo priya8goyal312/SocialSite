@@ -1,17 +1,6 @@
-# from grpc import protos_and_services
-
-from email import message
-from email.policy import default
-from enum import unique
-from http.client import FOUND
-from django.shortcuts import render
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
-#from grpc import Status
-#from joblib import PrintTime
-from requests import delete
 from flask_sqlalchemy import SQLAlchemy
-from sklearn.datasets import fetch_california_housing
 from sqlalchemy import true
 from flask import jsonify
 import utility
@@ -826,7 +815,7 @@ class FindUsers(Resource):
 
 
 
-
+# api for request list
 class ListPendingRequest(Resource):
     def post(self):
         print("*************************************** in ListPendingRequest (post method)")

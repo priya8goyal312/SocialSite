@@ -1,12 +1,9 @@
-# from grpc import protos_and_services
-
 # HTTP Request Status Codes
 
 # Informational
 from http.client import ACCEPTED
 from site import USER_BASE
 
-from zmq import CONNECT_TIMEOUT
 
 
 INFORMATIONAL_CONTINUE = 100 
