@@ -11,7 +11,10 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- custome CSS -->
-    <link rel="stylesheet" href="../static/css/people.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/people.css') }}">
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <title>Opinion</title>
 </head>
@@ -19,57 +22,87 @@
 <body>
 
     <section class="d-flex justify-content-sm-center" id="base">
-        <div class=" d-flex flex-column align-item-center col-12 col-sm-9 ">
-            <div class="d-flex flex-column justify-content-start px-1">
-                <div class="notificationTopBar sticky-top d-flex justify-content-center">
-                    <span class="notificationTopBarName py-3 mx-5">following</span>
-                    <span class="notificationTopBarName py-3 mx-5">followers</span>
-                    <span class="notificationTopBarName py-3 mx-5">find</span>
-                    <span class="notificationTopBarName py-3 mx-5">pending</span>
-                </div>
-                <br>
-                <hr>
-                <div >
-                <div class="col-12">
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterContentBox col-12 d-flex justify-content-between">
-                            <p>Tim Tim</p>
-                            <button>chat</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterContentBox col-12  d-flex justify-content-between">
-                            <p>Tim Tim</p>
-                            <button>chat</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterContentBox col-12  d-flex justify-content-between">
-                            <p class="d-flex justify-content-start">Tim Tim</p>
-                            <button class="d-flex justify-content-end">chat</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterContentBox col-12  d-flex justify-content-between">
-                            <p>Tim Tim</p>
-                            <button>chat</button>
-                        </div>
-                    </div>
-                </div>
+        <div class=" d-flex flex-column align-item-center col-12 col-sm-6 ">
+            <div class="d-flex flex-column justify-content-start px-1 py-2">
+                <div class=" options d-flex flex-column flex-sm-row py-2 justify-content-around">
+                    <span class=" mx-2" id="followersOption" onclick="showHide()">followers</span>
+                    <span class=" mx-2" id="followingOption" onclick="showHide2()">following</span>
+                    <span class=" mx-2" id="findOption" onclick="showHide3()">search</span>
+                    <span class="  mx-2" id="pendingOption" onclick="showHide4()">pending</span>
                 </div>
             </div>
+
+            <hr>
+
+
+            <div class="d-flex flex-column justify-content-between" id="followers">
+                <div class="d-flex py-2 mx-2 justify-content-around ">
+                    <span>tim tim followers</span>
+                    <button>view</button>
+                </div>
             </div>
+
+
+
+
+            <div class="d-none flex-column justify-content-between" id="following">
+                <div class="d-flex py-2 mx-2  justify-content-around ">
+                    <span>tim tim following</span>
+                    <button>view</button>
+                </div>
+            </div>
+
+
+
+
+            <div class=" d-none flex-column justify-content-between" id="find">
+                <div class="d-flex justify-content-center">
+                    <input id="searchInput" type="text" placeholder="search">
+                    <p class="mx-2" id="searchEmoji">&#128269</p>
+                </div>
+                <div id="findInnerBox" class="d-flex flex-column">
+                    <!-- DYNAMIC CONTENT HERE -->
+                </div>
+            </div>
+
+
+
+
+            <div class=" d-none flex-column justify-content-between" id="pending">
+                <div class="d-flex py-2 mx-2  justify-content-around">
+                    <span>tim tim</span>
+                    <div>
+                        <button>accept</button>
+                        <button>reject</button>
+                    </div>
+                </div>
+                <div class="d-flex py-2 mx-2 justify-content-around ">
+                    <span>tim tim</span>
+                    <div>
+                        <button>accept</button>
+                        <button>reject</button>
+                    </div>
+
+                </div>
+                <div class=" d-flex py-2 mx-2 justify-content-around ">
+                    <span>tim tim</span>
+                    <div>
+                        <button>accept</button>
+                        <button>reject</button>
+                    </div>
+                </div>
+                <div class="d-flex py-2 mx-2  justify-content-around ">
+                    <span>tim tim</span>
+                    <div>
+                        <button>accept</button>
+                        <button>reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- custome js -->
-    <!-- <script type="#" src="#"></script> -->
-    <!-- custome js end -->
+    <script type="module" src="{{ url_for('static', filename='/js/people.js') }}"></script>
 
     <!-- BootStrap Js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

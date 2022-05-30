@@ -77,7 +77,7 @@ function finduser(){
             for(let itr of response.data){
                 console.log(itr);
                 findInnerBoxStuff = findInnerBoxStuff +
-                `<div class="col-12 d-flex align-item-center justify-content-around my-3">`+
+                `<div class="col-12 d-flex align-item-center justify-content-between my-3">`+
                     `<p>${itr.userName}</p>`+
                     `<button>view</button>`+
                 `</div>`;

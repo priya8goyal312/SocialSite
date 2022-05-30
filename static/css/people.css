@@ -8,7 +8,7 @@ body {
   width: 100vw;
 }
 
-.button {
+button {
   width: 120px;
   height: 40px;
   background-color: #FFC796;
@@ -16,9 +16,23 @@ body {
   border-radius: 10px;
   color: #2f2e41;
   font-weight: 600;
+  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-.button:hover {
+
+button:hover {
   color: white;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
-}/*# sourceMappingURL=people.css.map */
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+#searchInput {
+  width: 340px;
+  border-radius: 10px;
+  border: 3px solid #FFC796;
+}
+
+#searchIcon {
+  font-size: 20px;
+}
+/*# sourceMappingURL=people.css.map */

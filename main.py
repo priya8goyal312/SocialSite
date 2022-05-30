@@ -874,6 +874,105 @@ class ListPendingRequest(Resource):
 
         return jsonify(apiResponse)
 
+
+
+class ListFollowers(Resource):
+    def post(self):
+        print("*************************************** in ListFollowers (post method)")
+
+        userID = request.form.get("userId")
+
+        print(userID)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            fetchedRequest = db.session.query(User, Connections).outerjoin(Connections, User.user_id == Connections.follower_id).filter(Connections.followee_id == userID, Connections.connection_status == 1).all()
+
+            if len(fetchedRequest) > 0:
+
+                allMatchedUser = []
+                
+                for user in fetchedRequest:
+                    print(user)
+                    
+                    allMatchedUser.append({
+                        "userId": user[0].user_id,
+                        "userName" : user[0].user_name
+                    })
+
+                apiResponse = {
+                    "api_status": USER_EXIST,
+                    "message": "User found",
+                    "data": allMatchedUser
+                }
+            
+            else:
+                apiResponse = {
+                    "api_status": USER_NOT_EXIST,
+                    "message": "Users not found"
+                }
+
+        except Exception as e:
+            print(e)
+
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server"
+            }
+        
+        return jsonify(apiResponse)
+
+
+
+
+
+class ListFollowees(Resource):
+    def post(self):
+        print("*************************************** in ListFollowing (post method)")
+
+        userID = request.form.get("userId")
+        
+        print(userID)
+
+        apiResponse = {} # making a empty dict variable
+
+        try:
+            fetchedRequest = db.session.query(User, Connections).outerjoin(Connections, User.user_id == Connections.followee_id).filter(Connections.follower_id == userID, Connections.connection_status == 1).all()
+
+            if len(fetchedRequest) > 0:
+
+                allMatchedUser = []
+                
+                for user in fetchedRequest:
+                    print(user)
+                    
+                    allMatchedUser.append({
+                        "userId": user[0].user_id,
+                        "userName" : user[0].user_name
+                    })
+
+                apiResponse = {
+                    "api_status": USER_EXIST,
+                    "message": "User found",
+                    "data": allMatchedUser
+                }
+            
+            else:
+                apiResponse = {
+                    "api_status": USER_NOT_EXIST,
+                    "message": "Users not found"
+                }
+
+        except Exception as e:
+            print(e)
+
+            apiResponse = {
+                "api_status": SERVER_ERROR_INTERNAL_SERVER_ERROR,
+                "message": "Oops! seems like some error occurred server"
+            }
+        
+        return jsonify(apiResponse)
 # end
 
 
@@ -910,6 +1009,10 @@ def homePage():
 def postUploadPage():
    return render_template('upload.html')
 
+@app.route('/peoplePage')
+def peoplePage():
+   return render_template('people.html')
+
 # end
 
 
@@ -941,6 +1044,8 @@ api.add_resource(FetchAllProfilePost,"/fetchAllProfilePost")
 api.add_resource(MakeFollowRequest,"/makeFollowRequest")
 api.add_resource(FindUsers,"/findUsers")
 api.add_resource(ListPendingRequest,"/listPendingRequest")
+api.add_resource(ListFollowers,"/listFollowers")
+api.add_resource(ListFollowees,"/listFollowees")
 
 
 
