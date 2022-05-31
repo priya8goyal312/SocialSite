@@ -26,6 +26,7 @@ let MenuHomeButton = document.getElementById("MenuHomeButton");
 let MenuProfileButton = document.getElementById("MenuProfileButton");
 let MenuNotificationButton = document.getElementById("MenuNotificationButton");
 let MenuSettingButton = document.getElementById("MenuSettingButton");
+let MenuShowPostButton = document.getElementById("MenuShowPostButton");
 
 
 let loginStatus;
@@ -53,6 +54,7 @@ MenuHomeButton.addEventListener("click",displaySection);
 MenuProfileButton.addEventListener("click",displaySection);
 MenuNotificationButton.addEventListener("click",displaySection);
 MenuSettingButton.addEventListener("click",displaySection);
+MenuShowPostButton.addEventListener("click",displaySection);
 // end
 
 

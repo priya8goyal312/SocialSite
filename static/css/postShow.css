@@ -19,16 +19,18 @@ body {
 .profileImage {
   height: 50px;
 }
+
 .profileImage img {
   height: 50px;
   width: 50px;
-  border-radius: 2rem;
+  border-radius: 2.0rem;
 }
 
 .individualCommentBox {
   position: relative;
   overflow-y: auto;
 }
+
 .individualCommentBox .commenterContentBox p {
   line-height: 10px;
   border: 1px;
@@ -37,6 +39,7 @@ body {
 .messageInputBox {
   margin-bottom: 10px;
 }
+
 .messageInputBox .inputBox {
   width: 90%;
 }
@@ -53,4 +56,5 @@ body {
 
 .commentsContainer {
   overflow-y: auto;
-}/*# sourceMappingURL=postShow.css.map */
+}
+/*# sourceMappingURL=postShow.css.map */

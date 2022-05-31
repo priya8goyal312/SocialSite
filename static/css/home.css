@@ -11,6 +11,7 @@ body {
   scrollbar-width: none;
   /* Firefox */
 }
+
 .base::-webkit-scrollbar {
   display: none;
 }
@@ -20,13 +21,17 @@ body {
   height: 98vh;
   position: absolute;
   z-index: 1010;
-  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  -webkit-transition: display 0.5s ease-in-out;
   transition: display 0.5s ease-in-out;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
+
 #sideNavBar .navBarButtonImages {
   width: 25px;
   height: 25px;
@@ -118,6 +123,7 @@ body {
   height: 2.5rem;
   border-radius: 1.5rem;
 }
+
 .avatar .avatarImage {
   width: 1.6rem;
   height: 1.6rem;
@@ -126,6 +132,7 @@ body {
 #menuButton {
   background-color: #F2F2F2;
 }
+
 #menuButton .avatarImage {
   width: 1.4rem;
   height: 1.4rem;
@@ -149,12 +156,14 @@ body {
   min-height: 200px;
   max-height: 300px;
 }
+
 #profileImageBox #profileImage {
   min-height: 200px;
   max-height: 300px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
 }
 
 #ownerActualName {
@@ -163,6 +172,7 @@ body {
   font-weight: 500;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 @media screen and (max-width: 576px) {
   #ownerActualName {
     text-align: center;
@@ -174,6 +184,7 @@ body {
   font-size: 1.1 rem;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 @media screen and (max-width: 576px) {
   #ownerUserName {
     text-align: center;
@@ -186,6 +197,7 @@ body {
   font-weight: 400;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 @media screen and (max-width: 576px) {
   #ownerBio {
     text-align: center;
@@ -209,6 +221,7 @@ body {
 .postPreviewBox {
   height: 200px;
 }
+
 .postPreviewBox .postPreviewInnerBox {
   background-color: #C3C3C3;
   border-radius: 10px;
@@ -216,9 +229,68 @@ body {
   width: 100%;
   overflow: hidden;
 }
+
 .postPreviewBox .postPreviewInnerBox img {
   width: auto;
   height: auto;
   max-height: 100%;
   max-width: 100%;
-}/*# sourceMappingURL=home.css.map */
+}
+
+/* post show css*/
+#base {
+  background-color: transparent;
+  height: 100vh;
+  width: 100vw;
+}
+
+#imagWrapper img {
+  height: 100%;
+}
+
+.commentsBox {
+  overflow-y: auto;
+}
+
+.profileImage {
+  height: 50px;
+}
+
+.profileImage img {
+  height: 50px;
+  width: 50px;
+  border-radius: 2.0rem;
+}
+
+.individualCommentBox {
+  position: relative;
+  overflow-y: auto;
+}
+
+.individualCommentBox .commenterContentBox p {
+  line-height: 10px;
+  border: 1px;
+}
+
+.messageInputBox {
+  margin-bottom: 10px;
+}
+
+.messageInputBox .inputBox {
+  width: 90%;
+}
+
+.sentButton {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.inputBox {
+  width: 150px;
+  border-radius: 1rem;
+}
+
+.commentsContainer {
+  overflow-y: auto;
+}
+/*# sourceMappingURL=home.css.map */

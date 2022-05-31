@@ -290,4 +290,58 @@ body {
     }
 }
 
+/* post show css*/
+
+#base{
+    background-color: transparent;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+#imagWrapper{
+    img{
+    height: 100%;
+    }
+}
+.commentsBox{
+    overflow-y: auto;
+}
+.profileImage{
+    height: 50px;
+    img{
+        height: 50px;
+        width: 50px; 
+        border-radius: 2.0rem;
+    }
+}
+.individualCommentBox{
+    position: relative;
+    overflow-y: auto;
+    .commenterContentBox{
+        p{
+            line-height: 10px;
+            border: 1px;
+        }
+    }
+}
+
+.messageInputBox{
+    margin-bottom: 10px;
+    .inputBox{
+        width: 90%;
+    }
+}
+.sentButton{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.inputBox{
+    width: 150px;
+    border-radius: 1rem;
+}
+.commentsContainer{
+    overflow-y: auto;
+}
+
 // end
