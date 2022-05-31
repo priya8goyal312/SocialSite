@@ -14,6 +14,9 @@ let searchEmoji = document.getElementById('searchEmoji');
 let searchInput = document.getElementById('searchInput');
 let findInnerBox = document.getElementById('findInnerBox');
 
+let userId;
+checkIfLoggedIn();
+followersList();
 
 window.showHide = function () {
     follower.classList.remove('d-none');
@@ -56,12 +59,21 @@ window.showHide4 = function () {
     following.classList.add('d-none');
 }
 
+// function to check if the user is logged in
+function checkIfLoggedIn(){
+   let loginStatus = localStorage.getItem('opinionLoginStatus');
+   userId = localStorage.getItem('opinionUserId');
+
+    if( !(loginStatus && userId) ){
+        window.location.href = "/loginPage";
+    }
+
+}
+
 searchEmoji.addEventListener('click', finduser);
 
 function finduser(){
     let userToFind = searchInput.value;
-    console.log("find user m aaya");
-    console.log(userToFind);
 
     $.ajax({
         method: "POST",
@@ -93,3 +105,106 @@ function finduser(){
         }
     });
 }
+
+
+followersOption.addEventListener('click', followersList);
+
+function followersList(){
+
+      
+    $.ajax({
+        method: "POST",
+        url: "/listFollowers",
+        data: { 
+            "userId": userId,
+        }
+    })
+    .done(function( response ) {
+        if(response.api_status === USER_EXIST ){
+            let followers = ""
+
+            
+            for(let itr of response.data){
+                followers = followers +
+                `<div class="col-12 d-flex align-item-center justify-content-between my-3">`+
+                    `<p>${itr.userName}</p>`+
+                    `<button>view</button>`+
+                `</div>`;
+            }
+            follower.innerHTML = followers;
+        }
+        else{
+            alert( "Message: " + response.message );
+        }
+    });
+}
+
+
+
+followingOption.addEventListener('click', followingList);
+
+function followingList(){
+    console.log(userId);
+      
+    $.ajax({
+        method: "POST",
+        url: "/listFollowees",
+        data: { 
+            "userId": userId,
+        }
+    })
+    .done(function( response ) {
+        if(response.api_status === USER_EXIST ){
+            let followings = ""
+
+            
+            for(let itr of response.data){
+                followings = followings +
+                `<div class="col-12 d-flex align-item-center justify-content-between my-3">`+
+                    `<p>${itr.userName}</p>`+
+                    `<button>view</button>`+
+                `</div>`;
+            }
+            following.innerHTML = followings;
+        }
+        else{
+            alert( "Message: " + response.message );
+        }
+    });
+}
+
+pendingOption.addEventListener('click', pendingList);
+
+function pendingList(){
+      
+    $.ajax({
+        method: "POST",
+        url: "/listPendingRequest",
+        data: { 
+            "userId": userId,
+        }
+    })
+    .done(function( response ) {
+        if(response.api_status === USER_EXIST ){
+            let request = ""
+
+            
+            for(let itr of response.data){
+                request = request +
+                `<div class="col-12 d-flex justify-content-between my-3">`+
+                    `<p>${itr.userName}</p>`+
+                    `<div>`+
+                    `<button class = "mx-2" >Accept</button>`+ 
+                    `<button class = "mx-2" >Reject</button>`+
+                `</div>`+
+                    `</div>`;
+            }
+            pending.innerHTML = request;
+        }
+        else{
+            alert( "Message: " + response.message );
+        }
+    });
+}
+
+
