@@ -37,7 +37,7 @@
 
 
     <div class="d-flex flex-column px-2">
-      <div class="col-12 menubutton my-3" data-section-to-show="#" id="MenuHomeButton">
+      <div class="col-12 menubutton my-3" data-section-to-show="feedsSection" id="MenuHomeButton">
         <img class="navBarButtonImages" id="Home" src="{{ url_for('static',filename = '/images/icons/home1.png' ) }}">
         Home
       </div>
@@ -48,7 +48,7 @@
         Profile
       </div>
 
-      <div class="col-12 menubutton my-3" data-section-to-show="#" id="MenuNotificationButton">
+      <div class="col-12 menubutton my-3" data-section-to-show="notificationSection" id="MenuNotificationButton">
         <img class="navBarButtonImages" id="Notification"
           src="{{ url_for('static',filename = '/images/icons/notification1.png' ) }}">
         Notification
@@ -66,8 +66,8 @@
         postShow
       </div>
 
-      <div class="col-12 menubutton my-3" data-section-to-show="postSection" id="MenuShowPostButton">
-        <img class="navBarButtonImages" id="postShow"
+      <div class="col-12 menubutton my-3" data-section-to-show="baseExplore" id="MenuExploreButton">
+        <img class="navBarButtonImages" id="ExploreShow"
           src="{{ url_for('static',filename = '/images/icons/setting1.png' ) }}">
         Explore
       </div>
@@ -101,6 +101,127 @@
     </div>
   </div>
   <!-- top bar end -->
+
+  <!--Home Section end-->
+  <section class="d-flex justify-content-center" id="feedsSection">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-3" id="feedsParent">
+
+      <div class="postCard my-2 py-2">
+        <!-- top bar -->
+        <div class="postCardTopBar d-flex justify-content-start">
+          <img class="postOwnerAvatar" src="../static/images/general/avtar.png">
+          <span class="postCardOwnerName py-2 mx-2">Tim1</span>
+        </div>
+        <!-- top bar end -->
+        <!-- main content -->
+        <div class="postCardContentBox">
+          <img class="postCardContent" src="../static/images/general/avtar.png">
+        </div>
+        <!-- main content end -->
+        <!-- bottom bar -->
+        <div class="postCardBottomBar">
+          <img id="post1" data-state="not-liked" src="../static/images/icons/non-liked.png"
+            onclick="likeToggle('post1')">
+          <img src="../static/images/icons/comments.png" style="float: right;">
+        </div>
+        <hr class="my-0 mx-3">
+        <div class="mx-3 py-3">caption here</div>
+        <!-- bottom bar end -->
+      </div>
+
+      <div class="postCard my-2 py-2">
+        <!-- top bar -->
+        <div class="postCardTopBar d-flex justify-content-start">
+          <img class="postOwnerAvatar" src="../static/images/general/avtar.png">
+          <span class="postCardOwnerName py-2 mx-2">Tim2</span>
+        </div>
+        <!-- top bar end -->
+        <!-- main content -->
+        <div class="postCardContentBox">
+          <img class="postCardContent" src="../static/images/general/avtar.png">
+        </div>
+        <!-- main content end -->
+        <!-- bottom bar -->
+        <div class="postCardBottomBar">
+          <img id="post2" data-state="not-liked" src="../static/images/icons/non-liked.png"
+            onclick="likeToggle('post2')">
+          <img src="../static/images/icons/comments.png" style="float: right;">
+        </div>
+        <hr class="my-0 mx-3">
+        <div class="mx-3 py-3">caption here</div>
+        <!-- bottom bar end -->
+      </div>
+
+      <div class="postCard my-2 py-2">
+        <!-- top bar -->
+        <div class="postCardTopBar d-flex justify-content-start">
+          <img class="postOwnerAvatar" src="../static/images/general/avtar.png">
+          <span class="postCardOwnerName py-2 mx-2">Tim3</span>
+        </div>
+        <!-- top bar end -->
+        <!-- main content -->
+        <div class="postCardContentBox">
+          <img class="postCardContent" src="../static/images/general/avtar.png">
+        </div>
+        <!-- main content end -->
+        <!-- bottom bar -->
+        <div class="postCardBottomBar">
+          <img id="post3" data-state="not-liked" src="../static/images/icons/non-liked.png"
+            onclick="likeToggle('post3')">
+          <img src="../static/images/icons/comments.png" style="float: right;">
+        </div>
+        <hr class="my-0 mx-3">
+        <div class="mx-3 py-3">caption here</div>
+        <!-- bottom bar end -->
+      </div>
+
+      <div class="postCard my-2 py-2">
+        <!-- top bar -->
+        <div class="postCardTopBar d-flex justify-content-start">
+          <img class="postOwnerAvatar" src="../static/images/general/avtar.png">
+          <span class="postCardOwnerName py-2 mx-2">Tim4</span>
+        </div>
+        <!-- top bar end -->
+        <!-- main content -->
+        <div class="postCardContentBox">
+          <img class="postCardContent" src="../static/images/general/avtar.png">
+        </div>
+        <!-- main content end -->
+        <!-- bottom bar -->
+        <div class="postCardBottomBar">
+          <img id="post4" data-state="not-liked" src="../static/images/icons/non-liked.png"
+            onclick="likeToggle('post4')">
+          <img src="../static/images/icons/comments.png" style="float: right;">
+        </div>
+        <hr class="my-0 mx-3">
+        <div class="mx-3 py-3">caption here</div>
+        <!-- bottom bar end -->
+      </div>
+
+      <div class="postCard my-2 py-2">
+        <!-- top bar -->
+        <div class="postCardTopBar d-flex justify-content-start">
+          <img class="postOwnerAvatar" src="../static/images/general/avtar.png">
+          <span class="postCardOwnerName py-2 mx-2 ">Tim5</span>
+        </div>
+        <!-- top bar end -->
+        <!-- main content -->
+        <div class="postCardContentBox">
+          <img class="postCardContent" src="../static/images/general/avtar.png">
+        </div>
+        <!-- main content end -->
+        <!-- bottom bar -->
+        <div class="postCardBottomBar">
+          <img id="post5" data-state="not-liked" src="../static/images/icons/non-liked.png" onclick="likeToggle('post5')">
+          <img src="../static/images/icons/comments.png" style="float: right;">
+        </div>
+        <hr class="my-0 mx-3">
+        <div class="mx-3 py-3">caption here</div>
+        <!-- bottom bar end -->
+      </div>
+    </div>
+  </section>
+  <!--Home Section end-->
 
   <!-- profile section -->
   <section class="d-flex justify-content-center col-12" id="ProfileSection">
@@ -183,6 +304,101 @@
     </div>
   </section>
   <!-- profile section end -->
+
+  <!-- notifications section start -->
+  <section class="d-none justify-content-sm-center" id="notificationSection">
+    <div class=" d-flex flex-column align-item-center col-12 col-sm-10 col-md-8 col-lg-6 ">
+      <div class="d-flex flex-column justify-content-start">
+        <!--notification top bar-->
+        <div class="notificationTopBar d-flex justify-content-center">
+          <span class="notificationTopBarName py-3">Notifications</span>
+        </div>
+
+        <!--notifications start-->
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2">Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+
+        <div class="individualCommentBox d-flex align-item-center py-2">
+          <div class="commenterContentBox col-12 d-flex flex-column">
+            <span>priyagoyal225</span>
+            <span class="py-2"> Sakshi Likes Your Photo</span>
+          </div>
+        </div>
+        <hr class="mx-0">
+      </div>
+    </div>
+  </section>
+  <!-- notifications section end -->
+
 
   <!-- setting section -->
   <section class="d-none justify-content-center" id="SettingSection">
@@ -274,12 +490,10 @@
       </div>
     </div>
   </section>
-
   <!-- setting section ends -->
 
 
-  <!--post show start-->
-
+  <!--post show section start-->
   <section class="d-none justify-content-sm-center" id="postSection">
     <div class=" d-flex flex-column flex-lg-row align-item-center col-12 col-sm-7 py-5" id="leftBox">
       <div class="col-12 col-lg-6 px-0 d-flex justify-content-center">
@@ -300,9 +514,9 @@
             <hr>
           </div>
           <div class="">
-              Caption Here
+            Caption Here
           </div>
-         <hr>
+          <hr>
 
 
 
@@ -411,10 +625,91 @@
         </div>
       </div>
   </section>
-
-
-
   <!--post show end-->
+
+  <!--Explore Section Start-->
+  <section class="d-flex justify-content-sm-center" id="baseExplore">
+    <div class=" d-flex flex-column align-item-center col-12 col-sm-6 ">
+      <div class="d-flex flex-column justify-content-start px-1 py-2">
+        <div class=" options d-flex flex-column flex-sm-row py-2 justify-content-around">
+          <span class=" mx-2" id="followersOption" onclick="showHide()">followers</span>
+          <span class=" mx-2" id="followingOption" onclick="showHide2()">following</span>
+          <span class=" mx-2" id="findOption" onclick="showHide3()">search</span>
+          <span class="  mx-2" id="pendingOption" onclick="showHide4()">pending</span>
+        </div>
+      </div>
+
+      <hr>
+
+
+      <div class="d-flex flex-column justify-content-between" id="followers">
+        <div class="d-flex py-2 mx-2 justify-content-around ">
+          <span>tim tim followers</span>
+          <button>view</button>
+        </div>
+      </div>
+
+
+
+
+      <div class="d-none flex-column justify-content-between" id="following">
+        <div class="d-flex py-2 mx-2  justify-content-around ">
+          <span>tim tim following</span>
+          <button>view</button>
+        </div>
+      </div>
+
+
+      <div class=" d-none flex-column justify-content-between" id="find">
+        <div class="d-flex justify-content-center">
+          <input id="searchInput" type="text" placeholder="search">
+          <p id="searchEmoji">&#128269</p>
+        </div>
+        <div id="findInnerBox" class="d-flex flex-column">
+          <!-- DYNAMIC CONTENT HERE -->
+        </div>
+      </div>
+
+
+
+
+      <div class=" d-none flex-column justify-content-between" id="pending">
+        <div class="d-flex py-2 mx-2  justify-content-around">
+          <span>tim tim</span>
+          <div>
+            <button>accept</button>
+            <button>reject</button>
+          </div>
+        </div>
+        <div class="d-flex py-2 mx-2 justify-content-around ">
+          <span>tim tim</span>
+          <div>
+            <button>accept</button>
+            <button>reject</button>
+          </div>
+
+        </div>
+        <div class=" d-flex py-2 mx-2 justify-content-around ">
+          <span>tim tim</span>
+          <div>
+            <button>accept</button>
+            <button>reject</button>
+          </div>
+        </div>
+        <div class="d-flex py-2 mx-2  justify-content-around ">
+          <span>tim tim</span>
+          <div>
+            <button>accept</button>
+            <button>reject</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Explore Section end-->
+
+
+
 
 
 

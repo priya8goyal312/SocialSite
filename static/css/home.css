@@ -307,4 +307,145 @@ body {
 .commentsContainer {
   overflow-y: auto;
 }
+
+#baseExplore {
+  background-color: transparent;
+  height: 100vh;
+  width: 100vw;
+}
+
+button {
+  width: 120px;
+  height: 40px;
+  background-color: #FFC796;
+  border: none;
+  border-radius: 10px;
+  color: #2f2e41;
+  font-weight: 600;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+button:hover {
+  color: white;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+#searchInput {
+  width: 340px;
+  border-radius: 10px;
+  border: 3px solid #FFC796;
+}
+
+#searchEmoji {
+  font-size: 25px;
+  margin: 0;
+}
+
+#feedsSection {
+  background-color: transparent;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+}
+
+#feedsParent {
+  overflow-y: auto;
+}
+
+#feedsParent::-webkit-scrollbar {
+  display: none;
+}
+
+.postCard {
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  border-color: #2F2E41;
+}
+
+.postCardTopBar {
+  background-color: transparent;
+  height: 3rem;
+  border-radius: 10px;
+}
+
+.postCardTopBar .postOwnerAvatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 45px;
+  margin-left: 2%;
+}
+
+.postCardTopBar #text {
+  font-size: 20px;
+  margin: -41px 50px 30px 50px;
+  padding: 10px 10px;
+}
+
+.postCardContentBox {
+  height: 19rem;
+}
+
+.postCardContentBox .postCardContent {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.postCardBottomBar {
+  background-color: transparent;
+  height: 3rem;
+  border-radius: 10px;
+}
+
+.postCardBottomBar img {
+  height: 30px;
+  margin-top: 9px;
+  margin-left: 2px;
+  padding: 1px 11px;
+}
+
+#imagWrapper img {
+  height: 100%;
+}
+
+.commentsBox {
+  overflow-y: auto;
+}
+
+.profileImage {
+  height: 50px;
+}
+
+.profileImage img {
+  height: 50px;
+  width: 50px;
+  border-radius: 2.0rem;
+}
+
+.individualCommentBox {
+  position: relative;
+}
+
+.individualCommentBox .commenterContentBox p {
+  line-height: 10px;
+  border: 1px;
+}
+
+.commentsContainer {
+  overflow-y: auto;
+}
+
+.notificationTopBar {
+  background-color: #F2F2F2;
+  height: 80px;
+}
+
+.notificationTopBar .notificationTopBarName {
+  font-size: x-large;
+  font-weight: 400px;
+}
 /*# sourceMappingURL=home.css.map */
