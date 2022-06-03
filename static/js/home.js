@@ -58,7 +58,13 @@ MenuShowPostButton.addEventListener("click",displaySection);
 // end
 
 
-// function
+// function for close the post page
+
+document.getElementById('postSection').addEventListener('click', function(e) {
+    e.preventDefault();
+    this.parentNode.style.display = 'none';
+}, false);
+
 
 // function to check if the user is logged in
 function checkIfLoggedIn(){
@@ -93,13 +99,16 @@ function displaySection(){
     let AllSection = document.querySelectorAll("section");
     for( let sec of AllSection){
         // console.log(sec);
+        // console.log(sec.id);
+        // console.log(this.dataset.sectionToShow);
+
         if(sec.id === this.dataset.sectionToShow){
-            sec.classList.toggle("d-none"); // remove none which is already applied
-            sec.classList.toggle("d-flex"); // apply flex which is not applied
+            sec.classList.remove("d-none"); // remove none which is already applied
+            sec.classList.add("d-flex"); // apply flex which is not applied
         }
         else{
-            sec.classList.toggle("d-flex"); // remove flex which is already applied
-            sec.classList.toggle("d-none"); // apply none which is not applied
+            sec.classList.remove("d-flex"); // remove flex which is already applied
+            sec.classList.add("d-none"); // apply none which is not applied
         }
     }
 }

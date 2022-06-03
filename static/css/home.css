@@ -238,18 +238,32 @@ body {
 }
 
 /* post show css*/
+#postSection {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 #base {
   background-color: transparent;
   height: 100vh;
   width: 100vw;
 }
 
+.topBarUserName {
+  background-color: #F2F2F2;
+}
+
 #imagWrapper img {
-  height: 100%;
+  height: 80%;
+}
+
+.closeButton {
+  font-size: 35px;
 }
 
 .commentsBox {
   overflow-y: auto;
+  height: 80%;
+  background-color: white;
 }
 
 .profileImage {

@@ -66,6 +66,12 @@
         postShow
       </div>
 
+      <div class="col-12 menubutton my-3" data-section-to-show="postSection" id="MenuShowPostButton">
+        <img class="navBarButtonImages" id="postShow"
+          src="{{ url_for('static',filename = '/images/icons/setting1.png' ) }}">
+        Explore
+      </div>
+
     </div>
     <footer class="menubutton Logout px-2 mt-4">
       <img class="navBarButtonImages" id="login" src="{{ url_for('static',filename = '/images/icons/logout1.png' ) }}">
@@ -76,11 +82,11 @@
 
   <!-- top bar -->
   <div class="d-flex justify-content-center col-12" id="homeTopBarBox">
-    <div class="d-flex justify-content-between align-items-center px-2 col-12 col-sm-10 col-md-8 col-lg-6" id="homeTopBar" style="background-color: #F2F2F2;">
+    <div class="d-flex justify-content-between align-items-center px-2 col-12 col-sm-10 col-md-8 col-lg-6"
+      id="homeTopBar" style="background-color: #F2F2F2;">
       <div>
         <div class="avatar d-flex justify-content-center align-items-center" id="menuButton">
-          <img src="{{ url_for('static',filename = '/images/icons/menu1.png' ) }}" alt=""
-            class="avatarImage img-fluid">
+          <img src="{{ url_for('static',filename = '/images/icons/menu1.png' ) }}" alt="" class="avatarImage img-fluid">
         </div>
       </div>
       <div class="d-flex">
@@ -89,8 +95,7 @@
             class="avatarImage img-fluid">
         </div>
         <div class="avatar d-flex justify-content-center align-items-center ms-2" id="openchatsButton">
-          <img src="{{ url_for('static',filename = '/images/icons/chats1.png') }}" alt=""
-            class="avatarImage img-fluid">
+          <img src="{{ url_for('static',filename = '/images/icons/chats1.png') }}" alt="" class="avatarImage img-fluid">
         </div>
       </div>
     </div>
@@ -98,7 +103,7 @@
   <!-- top bar end -->
 
   <!-- profile section -->
-  <section class="d-flex justify-content-center col-12"  id="ProfileSection">
+  <section class="d-flex justify-content-center col-12" id="ProfileSection">
     <div class="base col-12 col-sm-10 col-md-8 col-lg-6" id="homeParent" style="background-color: #F2F2F2;">
       <!-- homeTopBar -->
       <!-- <div class="d-flex justify-content-between align-items-center px-2" id="homeTopBar">
@@ -271,137 +276,145 @@
   </section>
 
   <!-- setting section ends -->
-    
+
 
   <!--post show start-->
 
-
   <section class="d-none justify-content-sm-center" id="postSection">
-    <div class=" d-flex flex-column flex-lg-row align-item-center col-12 col-sm-9 py-5" id="leftBox">
-        <div class="col-12 col-lg-6 d-flex justify-content-center">
-            <div id="imagWrapper">
-                <img class="img-fluid" src="../static/images/general/avtar.png">
-            </div>
+    <div class=" d-flex flex-column flex-lg-row align-item-center col-12 col-sm-7 py-5" id="leftBox">
+      <div class="col-12 col-lg-6 px-0 d-flex justify-content-center">
+        <div id="imagWrapper">
+          <img class="img-fluid" src="../static/images/general/avtar.png">
         </div>
-        <div class="commentsBox d-flex flex-column justify-content-between col-12 col-lg-6  px-2">
-            <div class="commentsContainer">
-             
-                <div class="my-3 sticky-top">
-                    priyagoyal225
-                    <hr>
-                </div>
-                
+      </div>
+      <div class="commentsBox d-flex flex-column justify-content-between col-12 col-lg-6  px-2">
+        <div class="commentsContainer">
 
-
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div>
-                    <div class="individualCommentBox d-flex align-item-center my-3">
-                        <div class="commenterProfileBox col-2 profileImage">
-                            <img src="../static/images/general/avtar.png">
-                        </div>
-                        <div class="commenterContentBox col-10">
-                            <p>priyagoyal225</p>
-                            <p> This is aman</p>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
+          <div class="d-flex flex-row topBarUserName sticky-top">
+            <div class="col-11 d-flex justify-content-center ">
+              priyagoyal225
             </div>
-
-            <div class="col-12 d-flex  align-item-center messageInputBox">
-                <input type="text" class="inputBox" placeholder="add comments . .">
-                <img class=" sentButton img-fluid d-flex flex-row-reverse" src="../static/images/icons/send1.png">
+            <div class="col-1 d-flex justify-content-end">
+              <span class="closeButton">&times;</span>
             </div>
+            <hr>
+          </div>
+          <div class="">
+              Caption Here
+          </div>
+         <hr>
+
+
+
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <div class="individualCommentBox d-flex align-item-center my-3">
+              <div class="commenterProfileBox col-2 profileImage">
+                <img src="../static/images/general/avtar.png">
+              </div>
+              <div class="commenterContentBox col-10 my-1">
+                <p>priyagoyal225</p>
+                <p> This is aman</p>
+              </div>
+            </div>
+            <hr>
+          </div>
         </div>
-</section>
+
+        <div class="col-12 d-flex  align-item-center messageInputBox">
+          <input type="text" class="inputBox" placeholder="add comments . .">
+          <img class=" sentButton img-fluid d-flex flex-row-reverse" src="../static/images/icons/send1.png">
+        </div>
+      </div>
+  </section>
 
 
 
-   <!--post show end-->
+  <!--post show end-->
 
 
 
